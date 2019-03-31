@@ -1,0 +1,29 @@
+.page-title {
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #f0f0f0;
+  overflow: hidden;
+  position: relative;
+
+  .mask {
+    background: hsla(0, 0%, 96%, .4);
+    height: 100%;
+    position: relative;
+  }
+  .position {
+    padding: 2rem 0;
+    position: relative;
+    margin: auto;
+    width: 1180px;
+  }
+
+  h1 {
+    font-size: 26px;
+    margin: 0 15px;
+    font-weight: 700;
+    .weak {
+      display: inline-block;
+      font-size: 20px;
+      font-weight: 400;
+    }
+  }
+}

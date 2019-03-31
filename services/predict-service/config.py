@@ -1,0 +1,11 @@
+import os
+
+SECRET_KEY = os.urandom(24)
+
+# RABBITMQ_HOST = '120.78.165.238'
+# RABBITMQ_USERNAME = 'nhannt'
+# RABBITMQ_PASSWORD = 'nhan1412'
+# RPC_USER_NAME = 'guest'
+# RPC_PASSWORD = 'guest'
+
+RABBITMQ_HOST = '127.0.0.1'

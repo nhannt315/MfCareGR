@@ -1,0 +1,58 @@
+@import "../../styles/variables";
+
+#login-form {
+  padding-right: 64px;
+  .text-has-line {
+    em {
+      margin-left: 16px;
+      padding: 0 16px;
+      position: relative;
+
+      &::before, &::after {
+        background: #a9a9a9;
+        content: "";
+        height: 1px;
+        position: absolute;
+        top: 50%;
+        width: 80px;
+      }
+
+      &::after {
+        right: 100%;
+      }
+
+      &::before {
+        left: 100%;
+      }
+    }
+  }
+
+  .ant-btn {
+    font-size: 14px;
+    margin-bottom: 12px;
+    padding-left: 45px;
+    padding-right: 45px;
+    &:hover {
+      background-color: $color-white;
+      color: $color-primary-dark
+    }
+  }
+
+  .custom-label {
+    margin-top: 5px;
+  }
+
+  .primary-label {
+    display: block;
+    text-align: right;
+  }
+
+  .label-container {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  input {
+    box-shadow: 0 0 0 transparent;
+  }
+}

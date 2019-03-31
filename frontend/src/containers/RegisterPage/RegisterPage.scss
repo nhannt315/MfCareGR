@@ -1,0 +1,23 @@
+#signup {
+  h1 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 2.8px;
+  }
+
+  .radio-register {
+    display: block;
+    height: 3rem;
+    line-height: 3rem;
+  }
+
+  .primary-label {
+    display: block;
+    text-align: right;
+    padding-top: .5rem;
+  }
+
+  .radio-group {
+    padding: 0 0 1rem 1rem;
+  }
+}

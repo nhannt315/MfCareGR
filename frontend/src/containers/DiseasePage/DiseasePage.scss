@@ -1,0 +1,51 @@
+@import "../../styles/variables";
+#disease-list {
+  .content {
+    margin-top: 2rem;
+  }
+  section {
+    margin-bottom: 0;
+    padding: 20px;
+    position: relative;
+    & > h3 {
+      font-size: 18px;
+      line-height: 22px;
+      margin-bottom: 20px;
+      position: relative;
+      font-weight: bold;
+    }
+  }
+
+  .disease-index {
+    & > ul {
+      list-style: none;
+
+      li {
+        background: #f6f6f6;
+        color: #e9e4e4;
+        float: left;
+        font-size: 18px;
+        height: 40px;
+        line-height: 40px;
+        margin-bottom: 5px;
+        margin-right: 3px;
+        text-align: center;
+        text-transform: uppercase;
+        vertical-align: middle;
+        width: 35px;
+        & > div {
+          border-bottom: 2px solid transparent;
+          color: #333;
+          display: block;
+
+          &:hover {
+            cursor: pointer;
+            border-bottom-color: $color-primary;
+            color: $color-primary;
+          }
+        }
+      }
+    }
+  }
+
+}

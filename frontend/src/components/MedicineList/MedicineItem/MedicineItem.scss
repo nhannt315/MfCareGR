@@ -1,0 +1,36 @@
+@import '../../../styles/variables';
+
+.medicine-item {
+  display: inline-block;
+  position: relative;
+  width: 36rem;
+  .c-media {
+    height: 6rem;
+
+    &__title:hover {
+      color: $color-primary;
+    }
+
+
+    &__image--drug {
+      display: block;
+      background-color: #eee;
+    }
+
+    &__body {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 270px;
+    }
+
+    &__content {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 270px;
+      padding-left: 0;
+    }
+  }
+
+}

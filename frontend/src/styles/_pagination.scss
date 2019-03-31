@@ -1,0 +1,26 @@
+@import 'variables';
+
+.pagination {
+  margin: 20px 0;
+  text-align: center;
+  span {
+    display: inline-block;
+    padding: 0 5px;
+  }
+  .next-page, .prev-page {
+    border: 1px solid rgba(0, 0, 0, .1);
+    border-radius: 3px;
+    color: $color-primary;
+    display: inline-block;
+    padding: 5px 12px;
+    text-decoration: none;
+
+    &:hover {
+      cursor: pointer;
+      background: $color-primary;
+      border-color: $color-primary-dark;
+      color: $color-white;
+      text-decoration: none;
+    }
+  }
+}

@@ -1,0 +1,65 @@
+@import '../../styles/variables';
+
+.disease-body {
+  float: left;
+  overflow: hidden;
+  width: 100%;
+
+  ul {
+    list-style: none;
+    margin-bottom: 10px;
+    margin-top: -7px;
+
+    li {
+      float: left;
+      width: 33%;
+
+      a {
+        color: #333;
+        display: inline-block;
+        font-size: 14px;
+        padding: 7px 15px;
+        position: relative;
+
+        &:hover {
+          color: $color-primary;
+        }
+
+        &::before {
+          background: $color-primary;
+          content: "";
+          height: 4px;
+          left: 0;
+          position: absolute;
+          top: 17px;
+          width: 4px;
+        }
+      }
+    }
+
+    &::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  }
+
+  .back-to-top {
+    cursor: pointer;
+    font-size: 12px;
+    position: absolute;
+    right: 20px;
+    top: 23px;
+
+    i {
+      color: $color-primary;
+      margin-left: 5px;
+      display: inline-block;
+    }
+
+    & > div {
+      display: inline-block;
+      color: #999;
+    }
+  }
+}

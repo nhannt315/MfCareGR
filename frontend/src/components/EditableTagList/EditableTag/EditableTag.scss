@@ -1,0 +1,23 @@
+@import "../../../styles/variables";
+
+.cms-tag {
+  background: #cdcdcd;
+  border-radius: 20px;
+  color: #4a4a4a;
+  display: inline-block;
+  margin: 5px 2px 0 0;
+  padding: 5px 12px 6px;
+  text-decoration: none;
+  font-size: 12px;
+  cursor: pointer;
+
+  &:hover {
+    background: $color-primary;
+    color: #fff;
+  }
+
+  i {
+    margin-left: 5px;
+    padding-right: 0 !important;
+  }
+}

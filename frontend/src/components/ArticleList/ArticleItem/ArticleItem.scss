@@ -1,0 +1,95 @@
+@import "../../../styles/variables";
+
+.cms-item {
+  border-radius: 5px;
+  background-color: #fff;
+  border: 1px solid #e1e3e6;
+  padding: 16px;
+  margin-bottom: 16px;
+
+  .post-image {
+    margin: 10px auto;
+    width: 420px;
+    max-width: 100%;
+  }
+
+  h4 {
+    font-size: 24px;
+    font-weight: 700;
+    font-family: Helvetica,Arial,san-serif;
+
+    a {
+      color: #333;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .read-more {
+    color: $color-primary-dark;
+    font-weight: 400;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .cms-item-body {
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 16px;
+    h5 {
+      font-size: 16px;
+    }
+    h2 {
+      font-size: 20px;
+    }
+    .cms p {
+      margin: 0 0 15px;
+    }
+
+    .thumbnail-image {
+      border: 1px solid #dfdfdf;
+      height: auto;
+      width: 100px;
+      float: right;
+      position: relative;
+      margin-bottom: 16px;
+      margin-left: 16px;
+
+      img {
+        width: 100%;
+        height: auto;
+        border-radius: 3px;
+      }
+    }
+
+    .break-word {
+      margin-bottom: 16px;
+      overflow-wrap: break-word;
+    }
+  }
+
+  .cms-item-footer {
+    overflow: hidden;
+    position: relative;
+    padding-right: 100px
+  }
+
+  .view {
+    font-size: 13px;
+    color: #777;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .source {
+    color: #777;
+    font-size: 13px;
+  }
+}

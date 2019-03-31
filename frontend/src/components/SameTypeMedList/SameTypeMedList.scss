@@ -1,0 +1,83 @@
+@import "../../styles/variables";
+
+.top-list-same-type {
+  background: $color-white;
+  border: 1px solid #eee;
+  float: left;
+  margin: 0 0 20px;
+  padding: 0 15px;
+  width: 100%;
+  border-radius: 5px;
+
+  h3 {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    float: left;
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0;
+    width: 100%;
+
+  }
+
+  ul {
+    border-bottom: 1px solid #eee;
+    float: left;
+    list-style: none;
+    width: 100%;
+    padding-left: 0;
+
+    li {
+      padding: 0;
+      overflow: hidden;
+      position: relative;
+      border-bottom: none;
+      min-height: inherit;
+
+      .content-collection {
+        min-height: 40px;
+        padding: 10px 10px 10px 50px;
+        width: 100%;
+        float: left;
+        position: relative;
+      }
+
+      .body {
+        float: none;
+        h4 {
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 1.4;
+          margin: 0 0 2px;
+
+          a {
+            color: #333;
+
+            &:hover {
+              color: $color-primary;
+            }
+          }
+        }
+      }
+    }
+
+  }
+
+  .view-more {
+    clear: both;
+    display: block;
+    padding: 10px 0;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  .drug-icon {
+    background: transparent url(https://dwbxi9io9o7ce.cloudfront.net/build/9a513502f02d9532870ba75e2a724600.png) no-repeat -245px -37px/405px auto;
+    display: block;
+    height: 40px;
+    left: 0;
+    position: absolute;
+    top: 2px;
+    width: 40px
+  }
+}

@@ -1,0 +1,51 @@
+@import "../../styles/variables";
+
+.medicine-class-item {
+  display: inline-block;
+  width: 30%;
+
+  h3 {
+    background: #f5f5f5;
+    border-top: 1px solid #ebebeb;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+    padding: 13px 24px 13px 12px;
+    overflow: hidden;
+  }
+
+  ul {
+    list-style: none;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+
+    li {
+      overflow: hidden;
+
+      a {
+        border-top: 1px solid #ebebeb;
+        color: #333;
+        float: left;
+        font-size: 14px;
+        padding: 12px 12px 12px 40px;
+        text-decoration: none;
+        width: 100%;
+        position: relative;
+        &::before {
+          background: transparent url(https://dwbxi9io9o7ce.cloudfront.net/build/9a513502f02d9532870ba75e2a724600.png) no-repeat -375px 0/1000px auto;
+          content: "";
+          height: 13px;
+          left: 12px;
+          margin-top: -7px;
+          position: absolute;
+          top: 50%;
+          width: 18px;
+        }
+        &:hover {
+          color: $color-primary;
+        }
+      }
+    }
+  }
+}

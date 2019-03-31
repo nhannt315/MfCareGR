@@ -1,0 +1,85 @@
+@import '../../styles/variables';
+.suggestion {
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, .15);
+  font-size: 13px;
+  left: 0;
+  line-height: 1.3;
+  max-height: 450px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  z-index: 9;
+  border-radius: 4px;
+  .group {
+    float: left;
+    width: 100%;
+    ul {
+      li {
+        float: left;
+        width: 100%;
+      }
+      a {
+        color: #333;
+        float: left;
+        padding: 4px 10px;
+        position: relative;
+        width: 100%;
+        &:hover {
+          background: $color-primary;
+          color: $color-white;
+        }
+      }
+      .image {
+        float: left;
+        height: 30px;
+        margin-bottom: 0;
+        margin-right: 10px;
+        overflow: hidden;
+        width: 30px;
+        border-radius: 3px;
+      }
+      .title {
+        font-weight: 600;
+        margin: 0 0 2px;
+      }
+      span {
+        display: block;
+      }
+    }
+    h2 {
+      font-size: 13px;
+      .view-all {
+        font-size: 12px;
+        font-weight: 400;
+        position: absolute;
+        right: 6px;
+        top: 7px;
+      }
+      a {
+        color: #333;
+        display: block;
+        padding: 8px 12px 6px;
+        text-decoration: none;
+        position: relative;
+        &:hover {
+          background: $color-primary;
+          color: $color-white;
+        }
+      }
+      i {
+        font-size: 14px;
+        font-weight: 400;
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+.search {
+  .suggestion {
+    top: 46px !important;
+  }
+}

@@ -1,0 +1,110 @@
+@import "../../styles/variables";
+
+.listing-index {
+  padding-top: 2rem;
+  .grid-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  .grid-item {
+    display: block;
+    margin-top: 30px;
+    border-radius: 5px;
+    box-shadow: 3px 5px 5px rgba(0, 0, 0, 0.1);
+    &:hover {
+      background-color: $color-primary;
+      i, span, h4 {
+        color: $color-white;
+      }
+    }
+    a {
+      display: block;
+      min-height: 225px;
+      padding: 60px 15px 20px;
+      text-decoration: none;
+    }
+    span {
+      color: $color-primary;
+      display: block;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    i {
+      color: $color-primary;
+      display: block;
+      font-size: 50px;
+      margin-bottom: 10px;
+    }
+    h4 {
+      color: #4a4a4a;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.listing-index {
+  .full-item {
+    float: left;
+    margin-top: 2rem;
+    padding: 15px 0;
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 3px 5px 5px rgba(0, 0, 0, 0.1);
+
+    .view-more {
+      color: #4f4f4f;
+      display: block;
+      font-size: 13px;
+      text-align: right;
+      padding: 1rem 1rem 0 0;
+
+      &:hover {
+        color: $color-primary;
+      }
+    }
+    .item-header {
+      color: #4f4f4f;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      text-align: left;
+
+      i {
+        display: inline-block;
+        color: $color-primary-dark;
+        font-size: 20px;
+        margin-right: 10px;
+        margin-left: 2rem;
+      }
+    }
+
+    .item-body {
+      & > div > div {
+        margin: 0 .5rem 0 .5rem;
+      }
+      a {
+        img {
+          height: 10rem;
+          float: left;
+          object-fit: cover;
+          margin-bottom: 10px;
+          width: 100%;
+          border-radius: 3px;
+        }
+        h4 {
+          font-size: 13px;
+          font-weight: 600;
+          margin: 0;
+          &:hover {
+            color: $color-primary
+          }
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,46 @@
+#list .content>ul>li {
+  .media {
+    float: left;
+    margin: 0 15px 0 8px;
+    position: relative;
+    z-index: 1;
+    .doctor-image {
+      background-position-y: 20%;
+      border-radius: 4px 4px 0 0;
+      display: block;
+      height: 130px;
+      overflow: hidden;
+      width: 130px;
+      object-fit: cover;
+    }
+  }
+  .doctor-body {
+    position: relative;
+    .info {
+      margin: 0 0 0 153px;
+      min-height: 120px;
+      h2 {
+        font-weight: 400;
+        font-size: 16px;
+        margin: 0 0 5px;
+      }
+      .desc {
+        float: right;
+        font-size: 12px;
+        margin: 0 5px 40px 0;
+        width: 35%;
+      }
+      .brief {
+        margin: 0 39% 40px 10px;
+        dt {
+          float: left;
+          text-align: center;
+          width: 15px;
+        }
+        dd {
+          margin: 0 0 1px 25px;
+        }
+      }
+    }
+  }
+}

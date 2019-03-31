@@ -1,0 +1,14 @@
+json.id @article.id
+json.vicare_id @article.vicare_id
+json.title @article.title
+json.slug @article.slug
+json.description @article.description
+json.published_date @article.published_date
+json.author @article.author
+json.medium_image @article.medium_image
+json.homepage_image @article.homepage_image
+json.large_image @article.large_image
+json.thumbnail_image @article.thumbnail_image
+json.intro @article.intro
+json.body_html @article.body_html
+json.tags @tags

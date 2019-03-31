@@ -1,0 +1,44 @@
+.disease-background {
+  background: #f9f9f9 url(https://dwbxi9io9o7ce.cloudfront.net/build/0f1cd5e6980102be74432000ffae6c4a.jpg) no-repeat 100% 80%/auto 250px;
+  bottom: 0;
+  content: " ";
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+#doctor-list-page-title{
+  .mask .container {
+    padding-bottom: 35px;
+    padding-top: 30px;
+  }
+}
+#list {
+  .content {
+    margin-bottom: 0;
+  }
+}
+
+.has-aside {
+  .content {
+    float: left;
+    margin: 0 0 1.5rem;
+    position: relative;
+    width: 70%;
+  }
+}
+
+.weak {
+  display: block;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+@media (max-width: 1023px) {
+  .has-aside .content {
+    padding-right: 0;
+    width: 100%;
+  }
+}

@@ -1,0 +1,62 @@
+@import './variables';
+@import './shared';
+@import './page_title';
+@import './media';
+@import './pagination';
+@import './form';
+@import './button';
+
+*,
+*::after,
+*::before {
+  //margin: 0;
+  //padding: 0;
+  box-sizing: inherit;
+  //line-height: 1.5;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+img {
+  max-width: 100%;
+}
+
+body {
+  box-sizing: border-box;
+  font-family: 'Helvetica', 'Arial', san-serif;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+p {
+  margin: 0 0 10px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+ul {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+b, strong {
+  font-weight: 700;
+}
+
+a {
+  background-color: transparent;
+  transition: all .1s;
+}
+
+h1 {
+  color: #333;
+  font-size: 2.4rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+  margin: 0 0 10px;
+}

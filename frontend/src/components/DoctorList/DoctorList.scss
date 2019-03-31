@@ -1,0 +1,20 @@
+#list .content {
+  &>ul {
+    list-style: none;
+    margin-top: 10px;
+    padding-left: 0;
+  }
+  &>ul>li {
+    border: 1px solid hsla(0, 0%, 100%, 0);
+    border-bottom: 1px solid #eee;
+    clear: both;
+    padding: 15px 0;
+    position: relative;
+    transition: box-shadow .2s, border .1s;
+    &:hover {
+      border: 1px solid rgba(0, 0, 0, .14);
+      border-radius: 5px;
+      box-shadow: 4px 8px 20px rgba(0, 0, 0, .05);
+    }
+  }
+}

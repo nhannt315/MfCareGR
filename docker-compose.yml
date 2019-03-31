@@ -1,0 +1,155 @@
+version: '3'
+
+volumes:
+  article_postgres_data: {}
+  doctor_postgres_data: {}
+  toukou_postgres_data: {}
+  tag_postgres_data: {}
+  user_postgres_data: {}
+  disease-medicine_postgres_data: {}
+  search_postgres_data: {}
+  esdata: {}
+  bundle_cache: {}
+
+services:
+  api-gate-way:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    volumes:
+      - ./api-gateway/src:/gateway/src
+    depends_on:
+      - article-app
+      - doctor-app
+      - toukou-app
+      - user-app
+      - tag-app
+      - disease-medicine-app
+      - predict-app
+      - search-app
+    ports:
+      - "4000:4000"
+  front-end:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend/src:/app/src
+    ports:
+      - "3000:3000"
+  predict-app:
+    build:
+      context: ./services/predict-service
+      dockerfile: Dockerfile
+    volumes:
+      - ./services/predict-service:/app
+    ports:
+      - "5000:5000"
+  article-app:
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    build:
+      context: ./services/article-service
+      dockerfile: Dockerfile
+    volumes:
+      - ./services/article-service:/article-app
+      - bundle_cache:/bundle_cache
+    depends_on:
+      - article-db
+  article-db:
+    image: postgres
+    volumes:
+      - article_postgres_data:/var/lib/postgresql/data
+  disease-medicine-app:
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    build:
+      context: ./services/disease-medicine-service
+      dockerfile: Dockerfile
+    volumes:
+      - ./services/disease-medicine-service:/disease-medicine-app
+      - bundle_cache:/bundle_cache
+    depends_on:
+      - disease-medicine-db
+  disease-medicine-db:
+    image: postgres
+    volumes:
+      - disease-medicine_postgres_data:/var/lib/postgresql/data
+  doctor-app:
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    build:
+      context: ./services/doctor-info-service
+      dockerfile: Dockerfile
+    volumes:
+      - ./services/doctor-info-service:/doctor-app
+      - bundle_cache:/bundle_cache
+    depends_on:
+      - doctor-db
+  doctor-db:
+    image: postgres
+    volumes:
+      - doctor_postgres_data:/var/lib/postgresql/data
+  toukou-app:
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    build:
+      context: ./services/toukou-service
+      dockerfile: Dockerfile
+    volumes:
+      - ./services/toukou-service:/toukou-app
+      - bundle_cache:/bundle_cache
+    depends_on:
+      - toukou-db
+  toukou-db:
+    image: postgres
+    volumes:
+      - toukou_postgres_data:/var/lib/postgresql/data
+  user-app:
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    build:
+      context: ./services/user-service
+      dockerfile: Dockerfile
+    volumes:
+      - ./services/user-service:/user-app
+      - bundle_cache:/bundle_cache
+    depends_on:
+      - user-db
+  user-db:
+    image: postgres
+    volumes:
+      - user_postgres_data:/var/lib/postgresql/data
+  tag-app:
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    build:
+      context: ./services/tag-service
+      dockerfile: Dockerfile
+    volumes:
+      - ./services/tag-service:/tag-app
+      - bundle_cache:/bundle_cache
+    depends_on:
+      - tag-db
+  tag-db:
+    image: postgres
+    volumes:
+      - tag_postgres_data:/var/lib/postgresql/data
+  search-app:
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    build:
+      context: ./services/search-service
+      dockerfile: Dockerfile
+    volumes:
+      - ./services/search-service:/search-app
+      - bundle_cache:/bundle_cache
+    depends_on:
+      - search-db
+      - elasticsearch
+  search-db:
+    image: postgres
+    volumes:
+      - search_postgres_data:/var/lib/postgresql/data
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.6.2
+    container_name: elasticsearch
+    environment:
+      ES_JAVA_OPTS: "-Xms750m -Xmx750m"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"

@@ -1,0 +1,51 @@
+@import "../../styles/variables";
+
+.feeds-filter {
+  width: 100%;
+}
+
+.lg-feeds-filter {
+  position: static;
+  padding-bottom: 8px;
+  z-index: 2;
+
+  .panel-transparent {
+    background: transparent !important;
+    border: none;
+    padding: 8px;
+    margin: 0;
+  }
+
+  .panel {
+    background: #fff;
+    border: 1px solid #e1e3e6;
+    display: inline-block;
+    margin-bottom: 8px;
+    overflow: hidden;
+    padding: 16px;
+    width: 100%;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+
+    .panel-heading {
+      color: #666;
+      margin: 0;
+      padding: 4px;
+      position: relative;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      .post-count {
+        color: #bbb;
+        font-weight: 400;
+        margin-left: 5px;
+      }
+
+    }
+    .active {
+      background: #fff;
+      color: $color-primary-dark;
+    }
+  }
+}

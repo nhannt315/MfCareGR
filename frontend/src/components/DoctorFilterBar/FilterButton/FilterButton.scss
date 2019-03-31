@@ -1,0 +1,21 @@
+@import '../../../styles/variables';
+
+.filter-button {
+  background: $color-white;
+  border: 1px solid #bdbdbd;
+  padding: 6px 18px 5px;
+  margin: 0 2px 5px 0;
+  vertical-align: top;
+  display: inline-block;
+  border-radius: 4px;
+  font-size: 12px;
+  overflow: hidden;
+
+  i {
+    padding-right: 3px;
+  }
+  &:hover {
+    border-color: $color-primary-dark;
+    cursor: pointer;
+  }
+}

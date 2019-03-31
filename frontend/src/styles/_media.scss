@@ -1,0 +1,29 @@
+.c-media {
+  border-bottom: 1px solid #e8e8e8;
+  display: block;
+  margin: 0 0 10px;
+  padding: 0 0 10px;
+  text-decoration: none;
+
+  &__image {
+    background: url(https://dwbxi9io9o7ce.cloudfront.net/build/f4706672a682503c789805d7368993ff.jpg) no-repeat 50% 50%/cover;
+    border-radius: 3px;
+    border: 1px solid #eee;
+    display: block;
+    float: left;
+    height: 50px;
+    margin: 0 10px 0 0;
+    width: 75px;
+  }
+
+  &__body {
+    color: #333;
+  }
+  &__title {
+    font-weight: 700;
+  }
+
+  &__content {
+    padding: 0 0 0 85px;
+  }
+}

@@ -1,0 +1,26 @@
+
+
+.landing-drugs {
+  padding: 10px 0;
+  .bg-landing {
+    margin: 0 0 20px;
+    position: relative;
+    .mask {
+      background: url(https://dwbxi9io9o7ce.cloudfront.net/build/5617c57286dd67cefa61ac7100f1c416.jpg) no-repeat 50% 50%/cover;
+      height: 16.5rem;
+    }
+    p {
+      font-size: 20px;
+      font-weight: 300;
+      left: 60px;
+      margin: 0;
+      position: absolute;
+      text-align: center;
+      top: 40px;
+      width: 300px;
+    }
+  }
+  .landing-drugs-list {
+    margin: 0 0 2rem;
+  }
+}
