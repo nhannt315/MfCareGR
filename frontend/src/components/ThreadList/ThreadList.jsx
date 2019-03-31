@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { List, Spin } from 'antd';
+import { List, Skeleton } from 'antd';
 import InfiniteScroll from 'react-infinite-scroller';
 import PropTypes from 'prop-types';
 
@@ -11,9 +11,21 @@ class ThreadList extends PureComponent {
   render() {
     const hasMore = true;
     const {
-      threadList, isLoading, fetchThreadList,
+      threadList, isLoading, fetchThreadList, initialLoading,
       isAuthenticated, userData, token, updateThreadList, updateTagThread
     } = this.props;
+    console.log('initial', initialLoading);
+    if (initialLoading) {
+      console.log('render initial');
+      return (
+        <div>
+          <Skeleton avatar paragraph={{ rows: 4 }} />
+          <Skeleton avatar paragraph={{ rows: 4 }} />
+          <Skeleton avatar paragraph={{ rows: 4 }} />
+          <Skeleton avatar paragraph={{ rows: 4 }} />
+        </div>
+      );
+    }
     return (
       <div>
         <InfiniteScroll
@@ -50,7 +62,8 @@ ThreadList.propTypes = {
   token: PropTypes.string,
   updateThreadList: PropTypes.func,
   updateTagThread: PropTypes.func,
-  updateLikeThread: PropTypes.func
+  updateLikeThread: PropTypes.func,
+  initialLoading: PropTypes.bool
 };
 
 export default ThreadList;

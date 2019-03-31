@@ -51,7 +51,7 @@ class LoginPage extends PureComponent {
             <div className="signup-content">
               <Row>
                 <Col xs={24} md={12}>
-                  <LoginForm handleLogin={this.handleLogin} />
+                  <LoginForm handleLogin={this.handleLogin} submitting={this.props.isProcessing}/>
                 </Col>
                 <Col xs={24} md={12}>
                   <div className="image-login">

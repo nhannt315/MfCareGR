@@ -9,7 +9,7 @@ class PostsController < ApplicationController
                   else
                     "customer"
                   end
-    post = Post.new(
+    @post = Post.new(
       is_question: false,
       user_profile_id: @current_user.id,
       body_raw: params[:content],
@@ -18,23 +18,19 @@ class PostsController < ApplicationController
       toukou_id: params[:thread_id],
       parent_id: thread.post.id
     )
-    post.author = @current_user
-    if post.save
-      render json: post, methods: [:author], status: :ok
-    else
+    @post.author = @current_user
+    unless @post.save
       render json: {message: "Something is fucked up"}, status: :bad_request
     end
   end
 
   def update
-    post = Post.find(params[:id])
-    if post.user_profile_id != @current_user.id
+    @post = Post.find(params[:id])
+    if @post.user_profile_id != @current_user.id
       render json: {message: "No Permission"}, status: :forbidden
     end
-    post.author = @current_user
-    if post.update_attributes body_raw: params[:content]
-      render json: post, methods: [:author], status: :ok
-    else
+    @post.author = @current_user
+    unless @post.update_attributes body_raw: params[:content]
       render json: {message: "Something is fucked up"}, status: :internal_server_error
     end
   end

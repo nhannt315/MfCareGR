@@ -67,14 +67,14 @@ class AskDoctor extends PureComponent {
     const {articles, hasMoreArticle, articleLoading, type} = this.state;
     const {
       threadList, isFetchingList, isAuthenticated, userData,
-      token, addToThreadList, updateThreadList, updateTagThread
+      token, addToThreadList, updateThreadList, updateTagThread, page
     } = this.props;
     let renderComponent = null;
     if (type === 'article') {
       renderComponent = (
         <ArticleList
           loading={articleLoading} fetchArticle={this.fetchArticleData} articles={articles}
-          hasMore={hasMoreArticle}
+          hasMore={hasMoreArticle} initialLoading={this.state.articlePage === 1 && articleLoading}
         />
       );
     } else {
@@ -91,6 +91,7 @@ class AskDoctor extends PureComponent {
             updateThreadList={updateThreadList}
             updateTagThread={updateTagThread}
             updateLikeThread={this.props.updateLikeThread}
+            initialLoading={page === 1 && isFetchingList}
           />
         </React.Fragment>
       );

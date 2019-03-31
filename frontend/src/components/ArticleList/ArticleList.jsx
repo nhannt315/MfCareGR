@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import {List, Spin} from 'antd';
+import {List, Spin, Skeleton} from 'antd';
 import InfiniteScroll from 'react-infinite-scroller';
 import PropTypes from 'prop-types';
 
@@ -8,7 +8,10 @@ import './ArticleList.scss';
 
 class ArticleList extends PureComponent {
   render() {
-    const {articles, loading, hasMore, fetchArticle} = this.props;
+    const {articles, loading, hasMore, fetchArticle, initialLoading} = this.props;
+    if (initialLoading) {
+      return <Skeleton avatar />;
+    }
     return (
       <div>
         <InfiniteScroll
@@ -40,7 +43,8 @@ ArticleList.propTypes = {
   articles: PropTypes.array,
   loading: PropTypes.bool,
   hasMore: PropTypes.bool,
-  fetchArticle: PropTypes.func
+  fetchArticle: PropTypes.func,
+  initialLoading: PropTypes.bool
 };
 
 export default ArticleList;

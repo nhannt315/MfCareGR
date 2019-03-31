@@ -17,3 +17,4 @@ Note: All of the commands below need to run at the root of the project
 <i>It will take 3-4 minutes for all services to start and get ready</i>
 <br/>
 `*` Finally navigate to [http://localhost:3000](http://localhost:3000) in your browser to explore the app
+`*` Test account: doremon@gmail.com - nhan1412

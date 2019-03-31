@@ -81,7 +81,9 @@ class LoginForm extends PureComponent {
             )}
           </FormItem>
           <FormItem {...tailFormItemLayout}>
-            <Button className="confirm-button" type="primary" shape="round" icon="login" htmlType="submit">
+            <Button
+              className="confirm-button" loading={this.props.submitting} type="primary" shape="round" icon="login"
+              htmlType="submit">
               Đăng nhập
             </Button>
           </FormItem>
@@ -93,7 +95,8 @@ class LoginForm extends PureComponent {
 
 LoginForm.propTypes = {
   form: PropTypes.object,
-  handleLogin: PropTypes.func
+  handleLogin: PropTypes.func,
+  submitting: PropTypes.bool
 };
 
 export default Form.create()(LoginForm);
