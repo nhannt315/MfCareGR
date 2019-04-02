@@ -14,7 +14,9 @@ Note: All of the commands below need to run at the root of the project
 `*` Make sure port 3000, 4000 and 5000 are not being used by any processes
 <br/>
 `*` Run command `docker-compose up` to start server
+<br/>
 <i>It will take 3-4 minutes for all services to start and get ready</i>
 <br/>
 `*` Finally navigate to [http://localhost:3000](http://localhost:3000) in your browser to explore the app
+<br/>
 `*` Test account: doremon@gmail.com - nhan1412
