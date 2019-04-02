@@ -1,11 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import './DoctorFilterBar.scss';
 import FilterButton from './FilterButton';
 import FilterModal from './FilterModal';
-import DoctorService from '../../services/doctorService';
 
 class DoctorFilterBar extends PureComponent {
 

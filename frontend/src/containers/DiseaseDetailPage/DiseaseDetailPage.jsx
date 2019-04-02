@@ -124,7 +124,7 @@ class DiseaseDetailPage extends PureComponent {
                       {mostViewedList.map(disease => (
                         <li key={disease.id}>
                           {/*<Link to={`/benh/${disease.slug}`} className="disease-image"/>*/}
-                          <img className="disease-image" src={disease.images[0]} />
+                          <img className="disease-image" src={disease.images[0]} alt={disease.name}/>
                           <div className="body">
                             <h4><Link to={`/benh/${disease.slug}`}>{disease.name}</Link></h4>
                           </div>

@@ -52,7 +52,10 @@ class RegisterPage extends PureComponent {
                 {formType === 'user' ? <RegisterForm.UserForm /> : <RegisterForm.DoctorForm />}
               </Col>
               <Col xs={0} md={{span: 10, offset: 2}}>
-                <img className="img-register" src="https://dwbxi9io9o7ce.cloudfront.net/img/sign-up.b3ab3fad0c0b.png" />
+                <img
+                  alt="register" className="img-register"
+                  src="https://dwbxi9io9o7ce.cloudfront.net/img/sign-up.b3ab3fad0c0b.png"
+                />
               </Col>
             </Row>
           </div>

@@ -15,11 +15,10 @@ class App extends PureComponent {
   componentDidMount() {
     moment().locale('vi');
     this.props.tryAutoSignIn();
-    String.prototype.trunc =
-      String.prototype.trunc ||
-      function(n) {
-        return this.length > n ? this.substr(0, n - 1) + '...' : this;
-      };
+    // eslint-disable-next-line
+    String.prototype.trunc = String.prototype.trunc || function (n) {
+      return this.length > n ? this.substr(0, n - 1) + '...' : this;
+    };
   }
 
   render() {
@@ -49,58 +48,19 @@ class App extends PureComponent {
         />
         <div className="main">
           <Switch>
-            <Route exact path="/" render={() => <Containers.HomePage />} />
-            <Route exact path="/tra-cuu" render={() => <Containers.LookUp />} />
-            <Route
-              exact
-              path="/thuoc"
-              render={() => <Containers.MedicinePage />}
-            />
-            <Route
-              exact
-              path="/thuoc/danh-sach"
-              render={() => <Containers.MedicineListPage />}
-            />
-            <Route
-              exact
-              path="/benh/"
-              render={() => <Containers.DiseasePage />}
-            />
-            <Route
-              exact
-              path="/thuoc/:slug"
-              render={() => <Containers.MedicineDetailPage />}
-            />
-            <Route
-              exact
-              path="/benh/:slug"
-              render={() => <Containers.DiseaseDetailPage />}
-            />
-            <Route
-              exact
-              path="/hoi-bac-si"
-              render={() => <Containers.AskDoctor />}
-            />
-            <Route
-              exact
-              path="/bai-viet/:slug"
-              render={() => <Containers.ArticleDetailPage />}
-            />
-            <Route
-              exact
-              path="/dang-nhap"
-              render={() => <Containers.LoginPage />}
-            />
-            <Route
-              exact
-              path="/dang-ky"
-              render={() => <Containers.RegisterPage />}
-            />
-            <Route
-              exact
-              path="/bac-si"
-              render={() => <Containers.DoctorListPage />}
-            />
+            <Route exact path="/" component={Containers.HomePage} />
+            <Route exact path="/tra-cuu" component={Containers.LookUp} />
+            <Route exact path="/thuoc" component={Containers.MedicinePage} />
+            <Route exact path="/thuoc/danh-sach" component={Containers.MedicineListPage} />
+            <Route exact path="/benh/" component={Containers.DiseasePage} />
+            <Route exact path="/thuoc/:slug" component={Containers.MedicineDetailPage} />
+            <Route exact path="/benh/:slug" component={Containers.DiseaseDetailPage} />
+            <Route exact path="/hoi-bac-si" component={Containers.AskDoctor} />
+            <Route exact path="/bai-viet/:slug" component={Containers.ArticleDetailPage} />
+            <Route exact path="/dang-nhap" component={Containers.LoginPage} />
+            <Route exact path="/dang-ky" component={Containers.RegisterPage} />
+            <Route exact path="/danh-sach-bac-si" component={Containers.DoctorListPage} />
+            <Route exact path="/bac-si/:slug" component={Containers.DoctorDetailPage} />
           </Switch>
         </div>
         <Footer />

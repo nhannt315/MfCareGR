@@ -30,7 +30,7 @@ class MedicineDetail extends PureComponent {
     this.fetchData(slug);
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     this.setState({isLoading: true});
     let slug = this.props.match.params.slug;
     if (this.state.medicine.slug !== slug) {
@@ -70,7 +70,7 @@ class MedicineDetail extends PureComponent {
     if (medicine.image) {
       imageElement = (
         <section className="drug-image">
-          <img src={medicine.image} />
+          <img src={medicine.image} alt={medicine.name} />
         </section>
       );
     }

@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Form, Input, Tooltip, Icon, DatePicker, Checkbox, Button, Col, Row } from 'antd';
+import { Form, Input, Button, Col, Row } from 'antd';
 import PropTypes from 'prop-types';
 
 import './LoginForm.scss';

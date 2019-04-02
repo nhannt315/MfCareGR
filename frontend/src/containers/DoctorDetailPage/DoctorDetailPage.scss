@@ -1,0 +1,67 @@
+@import "../../styles/variables";
+
+#profile {
+  .profile-header {
+    background: url(https://dwbxi9io9o7ce.cloudfront.net/build/72e582948494501bbab89a19ee739402.jpg) no-repeat 50% 50%/cover;
+    .breadcrumb {
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .tab-content-link {
+      color: #8e8e8e;
+      font-size: 13px;
+      text-decoration: underline;
+      display: inline-block;
+      &:hover {
+        text-decoration: none;
+        color: $color-primary;
+        cursor: pointer;
+      }
+    }
+
+    .btn-group {
+      bottom: 0;
+      position: absolute;
+      right: 0;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+
+  .image {
+    object-fit: cover;
+    border: 1px solid #e7eaec;
+    float: left;
+    height: 165px;
+    margin-bottom: -48px;
+    position: relative;
+    width: 165px;
+    z-index: 1;
+    border-radius: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .profile-header-body {
+    bottom: 8px;
+    left: 190px;
+    min-height: 80px;
+    position: absolute;
+
+    h1 {
+      color: #4a4a4a;
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+  }
+  .vote-list {
+    margin-right: 30px;
+  }
+
+  .text-pink {
+    color: #ff749c;
+  }
+
+
+}

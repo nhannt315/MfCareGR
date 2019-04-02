@@ -123,4 +123,4 @@ EditableTagList.propTypes = {
   offEditMode: PropTypes.func
 };
 
-export default EditableTagList;
+export default onClickOutside(EditableTagList);

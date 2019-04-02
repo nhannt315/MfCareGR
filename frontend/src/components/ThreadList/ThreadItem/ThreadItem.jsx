@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
-import { Avatar, Row, Col, Button, Icon, message } from 'antd';
+import { Avatar, Row, Col, Button, message } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import moment from 'moment';
@@ -169,7 +169,7 @@ class ThreadItem extends PureComponent {
   };
 
   render() {
-    const {showReplyBox, commentList, listLoading, listError, editMode, editTag} = this.state;
+    const {showReplyBox, commentList, listLoading, editMode, editTag} = this.state;
     const {thread, userData, token, updateTagThread} = this.props;
     const question = thread.question;
     const creator = thread.question.creator;

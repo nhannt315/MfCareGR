@@ -121,12 +121,28 @@
   overflow-wrap: break-word;
 }
 
+.p-t-sm {
+  padding-top: 1.6rem;
+}
+
+.p-b-sm {
+  padding-bottom: 1.6rem;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #e7eaec;
+}
+
 .text-muted {
   color: #777;
 }
 
 .pull-left {
   float: left !important;
+}
+
+.pull-right {
+  float: right!important;
 }
 
 .list-inline {
@@ -148,4 +164,17 @@
 
 .like-active {
   color: $color-primary;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.p-l-r {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.text-bold {
+  font-weight: 700;
 }

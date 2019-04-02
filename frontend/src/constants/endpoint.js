@@ -21,10 +21,11 @@ export const GET_LOOKUP_DATA = '/lookUpData';
 export const LOGIN = '/auth/login';
 
 
-export const getThreadList = (page, tagIds) => {
+export const getThreadList = (page, tagIds, doctorId) => {
   let params = {
     page: page,
-    tag_ids: tagIds
+    tag_ids: tagIds,
+    doctor_id: doctorId
   };
 
   return `/toukous?${queryString.stringify(params)}`;
@@ -44,5 +45,6 @@ export const GET_TAG_LIST = '/tags';
 export const SEARCH_ALL = '/search';
 
 export const GET_DOCTORS = '/doctors';
+export const getDoctorDetail = (slug) => `/doctors/${slug}`;
 export const GET_SPECIALITIES = '/specialities';
 export const GET_FILTER_DATA = '/filter_data';

@@ -1,5 +1,3 @@
-import queryString from 'query-string';
-
 import ApiService from './Api';
 import { BASE_URL, GET_TAG_LIST } from '../constants/endpoint';
 

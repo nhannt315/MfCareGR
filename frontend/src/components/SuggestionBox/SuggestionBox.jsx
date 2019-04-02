@@ -70,7 +70,7 @@ class SuggestionBox extends PureComponent {
           <ul className="list-unstyled">
             {doctor.map(item => (
               <li key={item.id} className="item">
-                <Link to={`/benh/${item.slug}`}>
+                <Link to={`/bac-si/${item.slug}`}>
                   <img
                     className="image"
                     alt={item.name}

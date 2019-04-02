@@ -1,15 +1,11 @@
 import React, { PureComponent } from 'react';
-import {
-  Comment, Icon, Tooltip, Avatar, List, Modal, message
-} from 'antd';
-import parse from 'html-react-parser';
+import { List, Modal, message } from 'antd';
 import PropTypes from 'prop-types';
 
 import './CommentList.scss';
 import Loader from '../Loader';
 import CommentItem from './CommentItem';
 import ThreadService from '../../services/threadService';
-import { getDateTime, generateColor } from '../../shared/utilities';
 
 const confirm = Modal.confirm;
 
@@ -26,7 +22,7 @@ class CommentList extends PureComponent {
 
   deletePost = (postId) => {
     ThreadService.deleteComment(postId, this.props.token)
-      .then(resp => {
+      .then(() => {
         message.success('Thành công!');
         this.props.updateDeleteComment(postId);
       })

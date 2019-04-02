@@ -36,4 +36,14 @@ router.get('/filter_data', (req, res) => {
     });
 });
 
+router.get('/doctors/:id', (req, res) => {
+  api.get(req.originalUrl)
+    .then(resp => {
+      res.send(resp.data);
+    })
+    .catch(error => {
+      res.status(error.response.status).send(error.response.statusText);
+    });
+});
+
 module.exports = router;

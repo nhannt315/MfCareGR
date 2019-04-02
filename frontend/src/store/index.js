@@ -1,6 +1,5 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import { composeWithDevTools } from 'redux-devtools-extension';
 import authReducer from './reducers/authReducer';
 import threadReducer from './reducers/threadReducer';
 import searchReducer from './reducers/searchReducer';

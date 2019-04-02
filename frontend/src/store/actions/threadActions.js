@@ -1,11 +1,12 @@
 import * as actionTypes from './actionTypes';
 
 
-export const getThreadList = (page, tagIds) => {
+export const getThreadList = (page, tagIds, doctorId) => {
   return {
     type: actionTypes.GET_THREAD_LIST,
     page: page,
-    tagIds: tagIds
+    tagIds: tagIds,
+    doctorId: doctorId
   };
 };
 

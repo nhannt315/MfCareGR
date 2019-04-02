@@ -7,7 +7,7 @@ import {
   faMedkit, faMagic, faArrowCircleUp, faComments, faThumbsUp, faHeart, faComment,
   faPaperPlane, faBan, faQuestionCircle, faPlusCircle, faTimesCircle, faAngleDoubleRight,
   faTags, faGraduationCap, faStethoscope, faBook, faMapMarker, faHeartbeat, faLanguage, faUniversity,
-  faAngleDown, faFilter
+  faAngleDown, faFilter, faInfoCircle, faBriefcase, faHospitalAlt, faList, faTrophy, faGlobe, faAngleRight,
 
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -19,7 +19,7 @@ const init = () => {
     faMedkit, faMagic, faArrowCircleUp, faComments, faThumbsUp, faHeart, faComment,
     faPaperPlane, faBan, faQuestionCircle, faPlusCircle, faTimesCircle, faAngleDoubleRight,
     faTags, faGraduationCap, faStethoscope, faBook, faMapMarker, faHeartbeat, faLanguage, faUniversity,
-    faAngleDown, faFilter
+    faAngleDown, faFilter, faInfoCircle, faBriefcase, faHospitalAlt, faList, faTrophy, faGlobe, faAngleRight,
   );
 };
 

@@ -19,7 +19,8 @@ class DoctorsController < ApplicationController
   end
 
   def show
-
+    doctor = Doctor.friendly.find(params[:id])
+    render json: doctor, include: [:job, :ranks, :degrees, :specialities, :medical_services, :languages]
   end
 
   def get_info

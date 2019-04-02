@@ -55,6 +55,7 @@ class LookUp extends PureComponent {
         <Link to={`/bai-viet/${article.slug}`}>
           <img
             src={article.medium_image}
+            alt={article.title}
           />
           <h4>{article.title}</h4>
         </Link>
@@ -68,7 +69,7 @@ class LookUp extends PureComponent {
               <Row className="grid-container">
                 <Col xs={8} sm={6} className="text-center">
                   <article className="bg-white grid-item">
-                    <Link to="/bac-si">
+                    <Link to="/danh-sach-bac-si">
                       <i>
                         <FontAwesomeIcon icon="user-md" />
                       </i>

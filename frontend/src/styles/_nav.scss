@@ -1,0 +1,35 @@
+.nav-tabs {
+  margin: 0;
+  overflow-x: auto;
+  text-transform: uppercase;
+  white-space: nowrap;
+  width: 100%;
+  li {
+    display: inline-block;
+    .link {
+      display: inline-block;
+      color: #4a4a4a;
+      font-size: 13px;
+      padding: 0 5px;
+    }
+  }
+}
+
+.hover-underline {
+  .active {
+    border-bottom-color: #157fc0 !important;
+    color: #0066a6;
+    font-weight: 400;
+  }
+
+  li .link {
+    display: inline-block;
+    border-bottom: 4px solid transparent;
+    padding: 15px 10px 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+}

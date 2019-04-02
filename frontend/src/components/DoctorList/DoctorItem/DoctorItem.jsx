@@ -17,6 +17,7 @@ const DoctorItem = props => {
         <img
           className="doctor-image"
           src={doctor.data_images[0] ? doctor.data_images[0] : DEFAULT_URL}
+          alt={doctor.name}
         />
       </div>
       <div className="doctor-body">

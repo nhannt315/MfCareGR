@@ -27,9 +27,10 @@ class MedicinePage extends PureComponent {
   }
 
   render() {
-    const {medicineClassList, isLoading, error} = this.state;
-    const medicineRenderList = medicineClassList.map(element => <MedicineClass key={element.name} name={element.name}
-                                                                               medicineTypes={element.types} />)
+    const {medicineClassList} = this.state;
+    const medicineRenderList = medicineClassList.map(element => (
+      <MedicineClass key={element.name} name={element.name} medicineTypes={element.types} />
+    ));
     return (
       <React.Fragment>
         <div className="page-title">

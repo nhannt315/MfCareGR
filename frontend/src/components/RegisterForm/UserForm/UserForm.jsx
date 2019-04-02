@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Form, Input, Tooltip, Icon, DatePicker, Checkbox, Button } from 'antd';
+import { Form, Input, Checkbox, Button } from 'antd';
 import PropTypes from 'prop-types';
 
 import './UserForm.scss';
@@ -17,6 +17,7 @@ class UserForm extends PureComponent {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         // this.props.handleRegister(values);
+        console.log(values);
       }
     });
   };
@@ -56,11 +57,6 @@ class UserForm extends PureComponent {
         xs: {span: 24},
         sm: {span: 16},
       },
-    };
-
-
-    const config = {
-      rules: [{type: 'object', required: true, message: 'Please select your birthday!'}],
     };
     const tailFormItemLayout = {
       wrapperCol: {
@@ -145,7 +141,7 @@ class UserForm extends PureComponent {
               rules: [{required: true, message: 'Bạn phải đồng ý với điều khoản sử dụng'}],
               valuePropName: 'checked',
             })(
-              <Checkbox>Tôi đã đọc <a href="" style={{color: 'blue'}}>điều khoản sử dụng của MfCare</a></Checkbox>
+              <Checkbox>Tôi đã đọc <a href="/" style={{color: 'blue'}}>điều khoản sử dụng của MfCare</a></Checkbox>
             )}
           </FormItem>
           <FormItem {...tailFormItemLayout}>

@@ -1,0 +1,17 @@
+.collapsible-container.screen-lg {
+  float: left;
+  width: 100%;
+}
+
+.collapsible-container .collapsible-trigger {
+  position: relative;
+}
+.collapsible-container.screen-lg.collapsible-block.expanded .collapsible-target {
+  display: block;
+}
+
+.collapsible-container .collapsible-target {
+  float: left;
+  overflow: hidden;
+  width: 100%;
+}

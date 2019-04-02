@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Breadcrumb } from 'antd';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import './DoctorListPage.scss';

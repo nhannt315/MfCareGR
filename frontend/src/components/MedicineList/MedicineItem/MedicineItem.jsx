@@ -12,7 +12,9 @@ const MedicineItem = props => {
       <Link to={`/thuoc/${medicine.slug}`} className="c-media">
         <img
           className="c-media__image c-media__image--drug"
-          src={medicine.image ? medicine.image : medicineHolder} />
+          src={medicine.image ? medicine.image : medicineHolder}
+          alt={medicine.name}
+        />
         <div className="c-media__body">
           <span className="c-media__title">{medicine.name}</span>
           <div className="c-media__content">{medicine.company}</div>

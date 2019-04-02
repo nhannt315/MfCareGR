@@ -16,7 +16,7 @@ const client = new ApiService({baseURL: BASE_URL});
 
 const threadService = {};
 
-threadService.getThreadList = (page, tagIds) => client.get(getThreadList(page, tagIds));
+threadService.getThreadList = (page, tagIds, doctorId) => client.get(getThreadList(page, tagIds, doctorId));
 threadService.getCommentList = threadSlug => client.get(getCommentList(threadSlug));
 threadService.createComment = (threadId, hidingCreator, postContent, token) => {
   let headers = {

@@ -5,6 +5,9 @@ class ToukousController < ApplicationController
 
   def index
     @threads = Toukou.order(updated_at: :desc).page(@page).per(@item_per_page)
+    if params[:doctor_id]
+      @thread = Toukou.order(updated_at: :desc).includes(:posts).where(posts: {is_question: true, doctor_id: params[:doctor_id]})
+    end
     user_id_arr = []
     tag_id_arr = []
     doctor_id_arr = []
@@ -63,8 +66,8 @@ class ToukousController < ApplicationController
       render json: {message: 'No permission'}, status: :forbidden
     end
     @post.update_attributes(
-      body_raw: content,
-      hiding_creator: hiding_creator
+        body_raw: content,
+        hiding_creator: hiding_creator
     )
     @thread.tags = ThreadTagService.new(@thread.tag_ids, "id").call
     user_id_arr = [@post.user_profile_id]

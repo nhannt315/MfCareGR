@@ -71,7 +71,7 @@ class QuestionBox extends PureComponent {
           </div>
           <div className="media-body">
             <Input.TextArea
-              rows={3} placeholder="Bạn muốn hỏi bác sĩ và cộng đồng điều gì?"
+              rows={3} placeholder={this.props.placeholder || 'Bạn muốn hỏi bác sĩ và cộng đồng điều gì?'}
               value={value} onChange={this.handleTextAreaChange}
             />
           </div>
@@ -98,7 +98,8 @@ class QuestionBox extends PureComponent {
 
 QuestionBox.propTypes = {
   token: PropTypes.string,
-  updateThreadList: PropTypes.func
+  updateThreadList: PropTypes.func,
+  placeholder: PropTypes.string
 };
 
 export default QuestionBox;
