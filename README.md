@@ -17,6 +17,9 @@ Note: All of the commands below need to run at the root of the project
 <br/>
 <i>It will take 3-4 minutes for all services to start and get ready</i>
 <br/>
+<br/>
+`*` From root folder nagivate to frontend by command `cd frontend` and run `yarn run build && yarn run server`
+<br/>
 `*` Finally navigate to [http://localhost:3000](http://localhost:3000) in your browser to explore the app
 <br/>
 `*` Test account: doremon@gmail.com - nhan1412

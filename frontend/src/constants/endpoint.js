@@ -1,9 +1,10 @@
 import queryString from 'query-string';
 
 // export const BASE_URL = 'http://192.168.1.20:4000';
-// export const BASE_URL = 'http://localhost:4000';
-export const BASE_URL = 'http://api-gate-way:4000';
-export const NOTIFICATION_URL = 'http://notification-app:8080';
+export const BASE_URL = 'http://localhost:4000';
+// export const BASE_URL = 'http://api-gate-way:4000';
+// export const NOTIFICATION_URL = 'http://notification-app:8080';
+export const NOTIFICATION_URL = 'http://localhost:8080';
 
 export const MEDICINE_CLASSES = '/medicine_classes';
 export const getMedicineType = (slug, page) => `/medicine_types/${slug}?page=${page}`;
