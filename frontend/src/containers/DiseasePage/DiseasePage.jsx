@@ -17,6 +17,7 @@ class DiseasePage extends PureComponent {
   };
 
   componentDidMount() {
+    document.title = 'Danh sách bệnh';
     this.setState({isLoading: true});
     DiseaseService.getDiseases()
       .then(resp => {

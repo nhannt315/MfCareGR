@@ -12,7 +12,25 @@ router.get('/search', (req, res) => {
       res.send(resp.data);
     })
     .catch(error => {
-      res.status(error.response.status).send(error.response.statusText);
+      if (error && error.response) {
+        res.status(error.response.status).send(error.response.data);
+      } else {
+        res.status(500).send({message: 'Service error'});
+      }
+    });
+});
+
+router.get('/search_article', (req, res) => {
+  api.get(req.originalUrl)
+    .then(resp => {
+      res.send(resp.data);
+    })
+    .catch(error => {
+      if (error && error.response) {
+        res.status(error.response.status).send(error.response.data);
+      } else {
+        res.status(500).send({message: 'Service error'});
+      }
     });
 });
 

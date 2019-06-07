@@ -1,3 +1,5 @@
+json.has_more @has_more
+json.total @threads.total_count
 json.threads @threads do |thread|
   json.id thread.id
   json.slug thread.slug

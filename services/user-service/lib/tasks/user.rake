@@ -1,15 +1,22 @@
 namespace :user do
   desc "TODO"
-  task update: :environment do
-    require "json"
-    arr = File.read("doctor.json")
-    arr = JSON.parse arr
-    arr.each do |element|
-      user = UserProfile.find_by id: element["user_id"]
-      user.update_attributes(doctor_id: element["doctor_id"]) if user
-      puts element["doctor_id"]
-      user.save if user
-      puts "#{user.name}-#{user.id}" if user
+  task generate_province_gender: :environment do
+    UserProfile.find_each do |user|
+      gender_index = rand(3)
+      province_offset = rand(Province.count)
+      rand_province = Province.offset(province_offset).first
+      user.province_id = rand_province.id unless user.province
+      user.gender = gender_index unless user.gender
+      user.password = "nhan1412"
+      user.password_confirmation = "nhan1412"
+      unless user.email
+        user.email = "#{user.username}@gmail.com"
+      end
+      if user.save
+        puts user.name
+      else
+        puts user.errors.full_messages
+      end
     end
   end
 

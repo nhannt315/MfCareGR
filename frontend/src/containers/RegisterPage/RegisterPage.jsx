@@ -1,22 +1,91 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import { Row, Col, Radio } from 'antd';
+import { Row, Col, Radio, message } from 'antd';
 import PropTypes from 'prop-types';
+import sha1 from 'js-sha1';
 
+import * as actions from '../../store/actions';
 import './RegisterPage.scss';
 import * as RegisterForm from '../../components/RegisterForm';
+import DoctorService from '../../services/doctorService';
+import UploadService from '../../services/uploadService';
 
 class RegisterPage extends PureComponent {
   state = {
-    formType: 'user'
+    formType: 'user',
+    errors: null,
+    specialities: [],
+    doctorSubmitting: false
   };
+
+  componentDidMount() {
+    document.title = 'Đăng ký';
+    this.setState({errors: this.props.errors});
+    if (this.props.isAuthenticated) {
+      this.props.history.push('/');
+    }
+    DoctorService.getSpecialities()
+      .then(resp => this.setState({specialities: resp}))
+      .catch(error => console.log(error));
+  }
 
   switchForm = (e) => {
     this.setState({formType: e.target.value});
   };
 
+  handleUserRegister = ({name, email, password, confirm, phone}) => {
+    this.props.signUp(name, email, password, confirm, phone);
+  };
+
+  handleDoctorRegister = values => {
+    let payload = {
+      name: values.name,
+      email: values.email,
+      password: values.password,
+      password_confirm: values.confirm,
+      phone: values.phone,
+      place: values.place,
+      specialities: values.speciality
+    };
+    this.setState({doctorSubmitting: true});
+    UploadService.uploadImagesToCloudinary([values.identityImg.file, values.licenseImg.file])
+      .then(resp => {
+        console.log(resp);
+        payload.identity_img = resp[0].url;
+        payload.license_img = resp[1].url;
+        return DoctorService.registerDoctor(payload)
+      })
+      .then(() => {
+        this.setState({doctorSubmitting: false});
+        message.success('Tài khoản bác sĩ đã được đăng ký,Quản trị viên sẽ kiểm duyệt và thông báo khi tài khoản được kích hoạt!');
+        this.props.history.push('/');
+      })
+      .catch(error => {
+        console.log(error.response);
+        this.setState({doctorSubmitting: false});
+        if (error && error.response && error.response.data)
+          message.error(error.response.data.message.join(' '));
+        else
+          message.error('Có lỗi xảy ra');
+      });
+  };
+
+  componentDidUpdate() {
+    const {isAuthenticated, errors} = this.props;
+    if (isAuthenticated) {
+      message.success('Chào mừng bạn đến với MfCare');
+      this.props.history.push('/');
+    }
+    if (errors && errors.data) {
+      message.error(errors.data.errors.join('\n'));
+    }
+  }
+
+
   render() {
-    const {formType} = this.state;
+    const {formType, specialities, doctorSubmitting} = this.state;
+    const {isProcessing} = this.props;
     return (
       <div id="signup" className="container">
         <div className="p-t-lg p-b-xxl">
@@ -49,7 +118,10 @@ class RegisterPage extends PureComponent {
                     </Radio.Group>
                   </Col>
                 </Row>
-                {formType === 'user' ? <RegisterForm.UserForm /> : <RegisterForm.DoctorForm />}
+                {formType === 'user' ? (
+                  <RegisterForm.UserForm loading={isProcessing} handleRegister={this.handleUserRegister} />
+                ) : <RegisterForm.DoctorForm specialities={specialities} submitting={doctorSubmitting}
+                                             handleRegister={this.handleDoctorRegister} />}
               </Col>
               <Col xs={0} md={{span: 10, offset: 2}}>
                 <img
@@ -66,7 +138,27 @@ class RegisterPage extends PureComponent {
 }
 
 RegisterPage.propTypes = {
-  match: PropTypes.object
+  match: PropTypes.object,
+  isAuthenticated: PropTypes.bool,
+  errors: PropTypes.array,
+  isProcessing: PropTypes.bool,
+  signUp: PropTypes.func,
+  history: PropTypes.object
 };
 
-export default withRouter(RegisterPage);
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.auth.isAuthenticated,
+    errors: state.auth.errors,
+    isProcessing: state.auth.isProcessing
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    signUp: (name, email, password, confirm, phoneNumber) => dispatch(actions.signUp(email, name, password, confirm, phoneNumber))
+  };
+};
+
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RegisterPage));

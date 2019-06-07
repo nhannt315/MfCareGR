@@ -1,0 +1,47 @@
+.search {
+  //background: $color-white;
+  color: #999;
+  float: left;
+  padding: .8rem 0;
+  position: relative;
+  width: 100%;
+  display: block;
+  margin-top: 0;
+  button {
+    background: none;
+    border: none;
+    font-size: 16px;
+    height: 30px;
+    left: 0;
+    position: absolute;
+    top: 7px;
+    z-index: 1;
+    width: 30px;
+  }
+  .inner {
+    float: left;
+    width: 100%;
+  }
+}
+.search-area {
+  //float: right;
+  //width: 100%;
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
+
+.has-suggestion {
+  position: static;
+  width: 100%;
+  float: left;
+  input {
+    border: none;
+    color: #333;
+    padding: 5px 10px 4px 32px;
+    width: 100%;
+    border-radius: 5px;
+  }
+}

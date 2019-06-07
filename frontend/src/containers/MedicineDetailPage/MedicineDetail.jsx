@@ -48,6 +48,7 @@ class MedicineDetail extends PureComponent {
           medicineType: resp.medicine_type,
           isLoading: false
         });
+        document.title = resp.name;
       })
       .catch(error => this.setState({error: error, isLoading: false}));
     this.setState({sameTypeLoading: true});

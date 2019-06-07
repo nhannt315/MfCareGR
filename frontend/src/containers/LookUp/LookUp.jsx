@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import CommonService from '../../services/commonService';
 import ArticleService from '../../services/articleService';
+import PageLoader from '../../components/PageLoader';
 import './LookUp.scss';
 
 class LookUp extends PureComponent {
@@ -16,31 +17,45 @@ class LookUp extends PureComponent {
     disease: null,
     error: null,
     topArticles: [],
+    articleLoading: false,
+    dataLoading: false,
     totalArticles: 0
   };
 
   componentDidMount() {
     this.mounted = true;
+    document.title = 'Tra cứu';
+    this.setState({articleLoading: true, dataLoading: true});
     CommonService.getLookupData()
       .then(result => {
-        if (!this.mounted) {return;}
-        this.setState(result);
+        if (!this.mounted) {
+          return;
+        }
+        this.setState({...result, dataLoading: false});
       })
       .catch(err => {
-        if (!this.mounted) {return;}
-        this.setState({error: err});
+        if (!this.mounted) {
+          return;
+        }
+        this.setState({error: err, dataLoading: false});
       });
     ArticleService.getTopArticles()
       .then(result => {
-        if (!this.mounted) {return;}
+        if (!this.mounted) {
+          return;
+        }
         this.setState({
           topArticles: result.articles,
-          totalArticles: result.total
+          totalArticles: result.total,
+          articleLoading: false
         });
       })
       .catch(error => {
-        if (!this.mounted) {return;}
+        if (!this.mounted) {
+          return;
+        }
         console.log(error);
+        this.setState({articleLoading: false});
       });
   }
 
@@ -49,7 +64,7 @@ class LookUp extends PureComponent {
   }
 
   render() {
-    const {topArticles, totalArticles} = this.state;
+    const {topArticles, totalArticles, articleLoading, dataLoading} = this.state;
     const articleList = topArticles.map(article => (
       <Col xs={12} md={5} key={article.id}>
         <Link to={`/bai-viet/${article.slug}`}>
@@ -63,6 +78,7 @@ class LookUp extends PureComponent {
     ));
     return (
       <div className="listing-index p-b-xl bg-light-gray">
+        {(dataLoading || articleLoading) && <PageLoader />}
         <div className="container">
           <Row style={{textAlign: 'center'}}>
             <Col xs={20} md={20} offset={2}>

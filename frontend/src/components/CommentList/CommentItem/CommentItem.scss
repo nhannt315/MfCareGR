@@ -11,3 +11,14 @@
 .ant-comment-inner {
   padding: 2px 0 2px 0 !important;
 }
+
+
+.thread-comment {
+  .ant-comment-avatar {
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 5px;
+    }
+  }
+}

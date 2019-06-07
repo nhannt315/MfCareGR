@@ -1,4 +1,5 @@
 @import '../../../styles/variables';
+
 .navbar-header {
   background-color: $color-primary;
   float: left;
@@ -25,14 +26,39 @@
     background-color: $color-white;
   }
   .notification-icon {
-    line-height: 48px;
+    color: #fff;
+    font-size: 16px;
+    padding: 13px 10px;
+    position: relative;
+    display: block;
+    outline: 0;
+
+    .ant-badge-count {
+      margin-top: 10px;
+      margin-right: 5px;
+      min-width: 10px;
+      font-size: 12px;
+      height: 15px;
+      line-height: 15px;
+      padding: 0 4px;
+    }
+
+    .ant-badge-dot {
+      margin-top: 13px;
+      margin-right: 8px;
+      height: 6px;
+      width: 6px;
+      border-radius: 100%;
+      background: #f5222d;
+      z-index: 10;
+      box-shadow: 0 0 0 1px #fff;
+    }
   }
   .notification-area {
     float: left;
     margin: 0;
     padding: 0;
-    height: 48px;
-    vertical-align: middle;
+    cursor: pointer;
   }
 }
 
@@ -62,6 +88,57 @@
   right: 0;
   top: 0;
   z-index: 5;
+}
+
+.navbar-site {
+  float: left;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  .nav-menu-link-active {
+    border-color: $color-primary;
+    color: $color-primary-dark;
+    text-decoration: none;
+  }
+
+  .brand {
+    h2 {
+      color: $color-white;
+      height: 100%;
+      display: inline-block;
+      line-height: 2rem;
+      font-size: 26px;
+      font-family: 'Cabin Sketch', cursive;
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  li {
+    float: left;
+    white-space: nowrap;
+
+    a {
+      //border-bottom: 3px solid $color-white;
+      color: $color-white;
+      display: block;
+      padding: 13px 22px 11px;
+      text-decoration: none;
+      transition: border-color .2s, color .2s;
+
+      i {
+        font-size: 15px;
+        margin: 0 2px 0 0;
+      }
+
+      &:hover {
+        //border-color: $color-primary;
+        color: hsl(180, 100%, 55%);
+        text-decoration: none;
+      }
+    }
+  }
 }
 
 .nav-menu {
@@ -121,28 +198,3 @@
   }
 }
 
-.search {
-  background: $color-white;
-  color: #999;
-  float: left;
-  padding: .8rem 0;
-  position: relative;
-  width: 100%;
-  display: block;
-  margin-top: 0;
-  button {
-    background: none;
-    border: none;
-    font-size: 16px;
-    height: 30px;
-    left: 0;
-    position: absolute;
-    top: 7px;
-    z-index: 1;
-    width: 30px;
-  }
-  .inner {
-    float: left;
-    width: 65%;
-  }
-}

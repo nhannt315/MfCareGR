@@ -16,6 +16,20 @@ router.post('/auth/login', (req, res) => {
     });
 });
 
+router.post('/signup', (req, res) => {
+  api.post(req.originalUrl, req.body)
+    .then(resp => {
+      res.send(resp.data);
+    })
+    .catch(error => {
+      if (error) {
+        res.status(error.response.status).send(error.response.data);
+      } else {
+        res.status(500).send({message: 'Service error'});
+      }
+    });
+});
+
 router.get('/get_user_info/', (req, res) => {
   var token = req.headers.authorization;
   api.get(req.originalUrl, {headers: {'Authorization': token}})

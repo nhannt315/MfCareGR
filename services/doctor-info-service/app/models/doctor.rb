@@ -11,8 +11,15 @@ class Doctor < ApplicationRecord
   has_many :ranks, through: :doctor_ranks
   has_many :doctor_degrees
   has_many :degrees, through: :doctor_degrees
-  belongs_to :job
-  belongs_to :province
+  belongs_to :job, optional: true
+  belongs_to :province, optional: true
+
+  attr_accessor :user
+
+  scope :search, (lambda do |keyword|
+    keyword = keyword.to_s.strip
+    where "name LIKE ? ", "%#{sanitize_sql_like keyword}%" unless keyword.blank?
+  end)
 
   def doctor_slug
     "#{Vietnameses.convert_unicode(name)}-#{id}"

@@ -16,8 +16,7 @@ class UserForm extends PureComponent {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        // this.props.handleRegister(values);
-        console.log(values);
+        this.props.handleRegister(values);
       }
     });
   };
@@ -30,7 +29,7 @@ class UserForm extends PureComponent {
   compareToFirstPassword = (rule, value, callback) => {
     const form = this.props.form;
     if (value && value !== form.getFieldValue('password')) {
-      callback('Two passwords that you enter is inconsistent!');
+      callback('Xác nhận mật khẩu phải trùng khớp với mật khẩu cũ!');
     } else {
       callback();
     }
@@ -47,6 +46,7 @@ class UserForm extends PureComponent {
 
   render() {
     const {getFieldDecorator} = this.props.form;
+    const {loading} = this.props;
 
     const formItemLayout = {
       labelCol: {
@@ -145,7 +145,10 @@ class UserForm extends PureComponent {
             )}
           </FormItem>
           <FormItem {...tailFormItemLayout}>
-            <Button className="confirm-button" type="primary" shape="round" icon="login" htmlType="submit">
+            <Button
+              className="confirm-button" type="primary" shape="round" icon="login" htmlType="submit"
+              loading={loading}
+            >
               Đăng ký
             </Button>
           </FormItem>
@@ -156,7 +159,9 @@ class UserForm extends PureComponent {
 }
 
 UserForm.propTypes = {
-  form: PropTypes.object
+  form: PropTypes.object,
+  handleRegister: PropTypes.func,
+  loading: PropTypes.bool
 };
 
 export default Form.create()(UserForm);

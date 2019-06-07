@@ -1,4 +1,4 @@
-version: '3'
+version: '3.4'
 
 volumes:
   article_postgres_data: {}
@@ -10,6 +10,13 @@ volumes:
   search_postgres_data: {}
   esdata: {}
   bundle_cache: {}
+  rabbitmq_data: {}
+
+x-rabbitmq-env: &rabbitmq-env
+  RABBITMQ_PORT: 5672
+  RABBITMQ_USER: admin
+  RABBITMQ_PASSWORD: nimda
+  RABBITMQ_VHOST: mfcare-vhost
 
 services:
   api-gate-way:
@@ -27,16 +34,68 @@ services:
       - disease-medicine-app
       - predict-app
       - search-app
+      - notification-app
     ports:
       - "4000:4000"
-  front-end:
+  # front-end:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - ./frontend/src:/app/src
+  #   ports:
+  #     - "7000:3000"
+  # admin:
+  #   build:
+  #     context: ./admin
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - ./admin/src:/app/src
+  #   ports:
+  #     - "7000:4001"   
+  notification-app:
     build:
-      context: ./frontend
+      context: ./services/notification-service
       dockerfile: Dockerfile
     volumes:
-      - ./frontend/src:/app/src
+      - ./services/notification-service:/notification-app
     ports:
-      - "3000:3000"
+      - "8080:8080"
+    depends_on:
+      - rabbitmq
+  mail-app:
+    build:
+      context: ./services/mail-service
+      dockerfile: Dockerfile
+    volumes:
+    - ./services/mail-service:/mail-app
+    depends_on:
+    - rabbitmq
+  crawl-app:
+    build:
+      context: ./services/crawl-service
+      dockerfile: Dockerfile
+    volumes:
+    - ./services/crawl-service:/crawl-app
+    depends_on:
+    - rabbitmq
+    - article-app
+  # notification-db:
+  #   container_name: notification-db
+  #   image: mongo
+  #   volumes:
+  #   - ./data:/data/db
+  #   ports:
+  #   - "27017:27017"
+  rabbitmq:
+    build:
+      context: ./rabbitmq
+      dockerfile: Dockerfile
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data:/data
   predict-app:
     build:
       context: ./services/predict-service
@@ -46,7 +105,8 @@ services:
     ports:
       - "5000:5000"
   article-app:
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+#    command: bash -c "rm -f tmp/pids/server.pid && rm -rf tmp/cache && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: foreman start
     build:
       context: ./services/article-service
       dockerfile: Dockerfile
@@ -55,12 +115,13 @@ services:
       - bundle_cache:/bundle_cache
     depends_on:
       - article-db
+      - rabbitmq
   article-db:
     image: postgres
     volumes:
       - article_postgres_data:/var/lib/postgresql/data
   disease-medicine-app:
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: bash -c "rm -rf tmp/pids/server.pid && bundle exec rake tmp:cache:clear && bundle exec rails s -p 3000 -b '0.0.0.0'"
     build:
       context: ./services/disease-medicine-service
       dockerfile: Dockerfile
@@ -74,7 +135,7 @@ services:
     volumes:
       - disease-medicine_postgres_data:/var/lib/postgresql/data
   doctor-app:
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: bash -c "rm -rf tmp/pids/server.pid && bundle exec rake tmp:cache:clear && bundle exec rails s -p 3000 -b '0.0.0.0'"
     build:
       context: ./services/doctor-info-service
       dockerfile: Dockerfile
@@ -88,7 +149,7 @@ services:
     volumes:
       - doctor_postgres_data:/var/lib/postgresql/data
   toukou-app:
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: bash -c "rm -rf tmp/pids/server.pid && bundle exec rake tmp:cache:clear && bundle exec rails s -p 3000 -b '0.0.0.0'"
     build:
       context: ./services/toukou-service
       dockerfile: Dockerfile
@@ -102,7 +163,7 @@ services:
     volumes:
       - toukou_postgres_data:/var/lib/postgresql/data
   user-app:
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: bash -c "rm -rf tmp/pids/server.pid && bundle exec rake tmp:cache:clear && bundle exec rails s -p 3000 -b '0.0.0.0'"
     build:
       context: ./services/user-service
       dockerfile: Dockerfile
@@ -116,7 +177,7 @@ services:
     volumes:
       - user_postgres_data:/var/lib/postgresql/data
   tag-app:
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: bash -c "rm -rf tmp/pids/server.pid && bundle exec rake tmp:cache:clear && bundle exec rails s -p 3000 -b '0.0.0.0'"
     build:
       context: ./services/tag-service
       dockerfile: Dockerfile
@@ -130,7 +191,7 @@ services:
     volumes:
       - tag_postgres_data:/var/lib/postgresql/data
   search-app:
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: bash -c "rm -rf tmp/pids/server.pid && bundle exec rake tmp:cache:clear && bundle exec rails s -p 3000 -b '0.0.0.0'"
     build:
       context: ./services/search-service
       dockerfile: Dockerfile
@@ -140,6 +201,7 @@ services:
     depends_on:
       - search-db
       - elasticsearch
+      - rabbitmq
   search-db:
     image: postgres
     volumes:

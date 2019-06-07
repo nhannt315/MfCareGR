@@ -1,0 +1,155 @@
+{
+  "users": [
+    {
+      "name": "guest",
+      "password_hash": "jl8SwsyUdF7PMwIqmg480wCRLDE=",
+      "tags": "administrator"
+    },
+    {
+      "name": "admin",
+      "password_hash": "b/XedHeZ8AVWttrmlrs5Mjl+eKI=",
+      "tags": "administrator"
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "/"
+    },
+    {
+      "name": "mfcare-vhost"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "guest",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    },
+    {
+      "user": "admin",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    },
+    {
+      "user": "admin",
+      "vhost": "mfcare-vhost",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "parameters": [],
+  "policies": [],
+  "exchanges": [
+    {
+      "name": "notifications",
+      "vhost": "mfcare-vhost",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "mails",
+      "vhost": "mfcare-vhost",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "crawl",
+      "vhost": "mfcare-vhost",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "queues": [
+    {
+      "name": "questionAnsweredNotify",
+      "vhost": "mfcare-vhost",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "followedUserAnswerNotify",
+      "vhost": "mfcare-vhost",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "followedThreadNotify",
+      "vhost": "mfcare-vhost",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "mailQueue",
+      "vhost": "mfcare-vhost",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "article",
+      "vhost": "mfcare-vhost",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    }
+  ],
+  "bindings": [
+    {
+      "source": "notifications",
+      "vhost": "mfcare-vhost",
+      "destination": "questionAnsweredNotify",
+      "destination_type": "queue",
+      "routing_key": "*",
+      "arguments": {}
+    },
+    {
+      "source": "notifications",
+      "vhost": "mfcare-vhost",
+      "destination": "followedUserAnswerNotify",
+      "destination_type": "queue",
+      "routing_key": "*",
+      "arguments": {}
+    },
+    {
+      "source": "notifications",
+      "vhost": "mfcare-vhost",
+      "destination": "followedThreadNotify",
+      "destination_type": "queue",
+      "routing_key": "*",
+      "arguments": {}
+    },
+    {
+      "source": "mails",
+      "vhost": "mfcare-vhost",
+      "destination": "mailQueue",
+      "destination_type": "queue",
+      "routing_key": "*",
+      "arguments": {}
+    },
+    {
+      "source": "crawl",
+      "vhost": "mfcare-vhost",
+      "destination": "article",
+      "destination_type": "queue",
+      "routing_key": "*",
+      "arguments": {}
+    }
+  ]
+}

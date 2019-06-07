@@ -20,11 +20,11 @@ class CommentItem extends PureComponent {
 
   handleLikeButton = (dislike = false) => {
     const {comment, token, userData} = this.props;
-    if(dislike) {
+    if (dislike) {
       ThreadService.dislikePost(comment.id, token)
         .then(() => this.props.updateLikeComment('remove', comment.id, userData.id))
         .catch(() => message.error('Có lỗi đã xảy ra'));
-    }else {
+    } else {
       ThreadService.likePost(comment.id, token)
         .then(() => this.props.updateLikeComment('add', comment.id, userData.id))
         .catch(() => message.error('Có lỗi đã xảy ra'));
@@ -54,6 +54,9 @@ class CommentItem extends PureComponent {
   render() {
     const {comment, userData, showConfirmDelete} = this.props;
     const {isEdit, editSubmitting} = this.state;
+    let isDoctor = comment.author.doctor !== null;
+    let doctorInfo = comment.author.doctor;
+
     let isLiked = false;
     if (userData) {
       isLiked = comment.likes.includes(userData.id);
@@ -105,13 +108,26 @@ class CommentItem extends PureComponent {
     }
     return (
       <Comment
+        className="thread-comment"
         key={comment.id}
         actions={actions}
         author={hideName ? 'Thành viên giấu tên' : comment.author.name}
         content={parse(comment.body_raw)}
-        avatar={<Avatar shape="square" size={'large'} style={{backgroundColor: generateColor()}}>
-          {hideName ? 'A' : comment.author.name[0]}
-        </Avatar>}
+        avatar={isDoctor ? (
+          <Avatar
+            shape="square" size={'large'} style={{backgroundColor: generateColor()}}
+            src={doctorInfo.data_images ? doctorInfo.data_images[0] : null}
+          >
+            {!doctorInfo.data_images ? doctorInfo.name[0] : null}
+          </Avatar>
+        ) : (
+          <Avatar shape="square" size={'large'} style={{backgroundColor: generateColor()}}
+            src={comment.author.avatar ? comment.author.avatar : null}
+          >
+            {hideName ? 'A' : comment.author.name[0]}
+          </Avatar>
+        )
+        }
         datetime={getDateTime(comment.updated_at)}
       >
         {isEdit ? (

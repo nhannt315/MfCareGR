@@ -16,4 +16,34 @@ router.get('/tags', (req, res) => {
     });
 });
 
+router.get('/tags/:id', (req, res) => {
+  api.get(req.originalUrl)
+    .then(resp => {
+      res.send(resp.data);
+    })
+    .catch(error => {
+      res.status(error.response.status).send(error.response.statusText);
+    });
+});
+
+router.get('/search_tag', (req, res) => {
+  api.get(req.originalUrl)
+    .then(resp => {
+      res.send(resp.data);
+    })
+    .catch(error => {
+      res.status(error.response.status).send(error.response.statusText);
+    });
+});
+
+router.get('/tags/get_tags_by_ids', (req, res) => {
+  api.get(req.originalUrl)
+    .then(resp => {
+      res.send(resp.data);
+    })
+    .catch(error => {
+      res.status(error.response.status).send(error.response.statusText);
+    });
+});
+
 module.exports = router;

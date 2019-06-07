@@ -7,7 +7,11 @@ WORKDIR /article-app
 
 COPY Gemfile /article-app/Gemfile
 COPY Gemfile.lock /article-app/Gemfile.lock
+#RUN gem update --system
+#RUN gem install bundler
+#RUN bundler update --bundler
 RUN bundle install
+RUN gem install foreman
 COPY . /article-app
 EXPOSE 3000
 # RUN ["chmod", "+x", "./entry.sh"]

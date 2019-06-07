@@ -18,6 +18,14 @@ app = Flask(__name__)
 
 stopwords = FileReader(settings.STOP_WORDS).read_stopwords()
 
+def tokenize(content):
+    return ViTokenizer.tokenize(content)
+
+def remove_stopwords(content):
+    text = ' '.join([word for word in content.split() if word.encode('utf-8') not in stopwords])
+    return text
+
+
 @app.route('/')
 def index():
     return "Hello, World"
@@ -26,9 +34,8 @@ def index():
 def predict():
     data = request.json
     content = data["content"]
-    content_fixed = ViTokenizer.tokenize(content)
-    text = ' '.join([word for word in content_fixed.split() if word.encode('utf-8') not in stopwords])
-    result = magpie.predict_from_text(text)
+    content_fixed = tokenize(content)
+    result = magpie.predict_from_text(remove_stopwords(content_fixed))
     return_value = get_tag(result[:20])
     print result[:20]
     return jsonify({'result': return_value})

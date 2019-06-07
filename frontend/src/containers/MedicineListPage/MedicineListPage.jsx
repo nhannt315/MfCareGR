@@ -51,6 +51,7 @@ class MedicineListPage extends PureComponent {
             medicineTypeName: result.name,
             currentPage: nextPage
           });
+          document.title = result.name;
         })
         .catch(error => {
           this.setState({isLoading: false, error: error});
@@ -67,6 +68,7 @@ class MedicineListPage extends PureComponent {
             totalPage: result.total,
             currentPage: nextPage
           });
+          document.title = 'Danh sách thuốc';
         })
         .catch(error => {
           this.setState({isLoading: false, error: error});

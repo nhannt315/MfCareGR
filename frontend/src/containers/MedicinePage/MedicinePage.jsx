@@ -17,6 +17,7 @@ class MedicinePage extends PureComponent {
 
   componentDidMount() {
     this.setState({isLoading: true});
+    document.title = 'Thông tin tra cứu thuốc';
     medicineApi.getMedicineClasses()
       .then(resp => {
         this.setState({isLoading: false, medicineClassList: resp});

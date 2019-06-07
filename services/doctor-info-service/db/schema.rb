@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_25_105019) do
+ActiveRecord::Schema.define(version: 2019_05_09_023607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,10 @@ ActiveRecord::Schema.define(version: 2019_03_25_105019) do
     t.datetime "updated_at", null: false
     t.integer "view_count"
     t.bigint "province_id"
+    t.boolean "activated", default: false
+    t.string "identity_image"
+    t.string "license_image"
+    t.string "place"
     t.index ["job_id"], name: "index_doctors_on_job_id"
     t.index ["province_id"], name: "index_doctors_on_province_id"
   end

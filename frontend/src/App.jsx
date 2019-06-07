@@ -9,6 +9,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import * as actions from './store/actions';
 import * as Containers from './containers';
+import GlobalAskButton from './components/GlobalAskButton';
 import './App.scss';
 
 class App extends PureComponent {
@@ -31,7 +32,9 @@ class App extends PureComponent {
       searchLoading,
       searchResult,
       searchMode,
-      clearSearchResult
+      clearSearchResult,
+      token,
+      history
     } = this.props;
     return (
       <div className="App">
@@ -45,6 +48,7 @@ class App extends PureComponent {
           searchError={searchError}
           searchResult={searchResult}
           clearSearchResult={clearSearchResult}
+          token={token}
         />
         <div className="main">
           <Switch>
@@ -55,14 +59,19 @@ class App extends PureComponent {
             <Route exact path="/benh/" component={Containers.DiseasePage} />
             <Route exact path="/thuoc/:slug" component={Containers.MedicineDetailPage} />
             <Route exact path="/benh/:slug" component={Containers.DiseaseDetailPage} />
+            <Route exact path="/hoi-bac-si/dat-cau-hoi" component={Containers.QuestionPage} />
+            <Route exact path="/hoi-bac-si/:slug" component={Containers.ThreadPage} />
             <Route exact path="/hoi-bac-si" component={Containers.AskDoctor} />
             <Route exact path="/bai-viet/:slug" component={Containers.ArticleDetailPage} />
             <Route exact path="/dang-nhap" component={Containers.LoginPage} />
             <Route exact path="/dang-ky" component={Containers.RegisterPage} />
             <Route exact path="/danh-sach-bac-si" component={Containers.DoctorListPage} />
             <Route exact path="/bac-si/:slug" component={Containers.DoctorDetailPage} />
+            <Route exact path="/chu-de/:slug" component={Containers.TopicPage} />
+            <Route exact path={['/tai-khoan', '/tai-khoan/doi-mat-khau']} component={Containers.UserPage} />
           </Switch>
         </div>
+        <GlobalAskButton history={history} />
         <Footer />
       </div>
     );
@@ -79,13 +88,16 @@ App.propTypes = {
   searchLoading: PropTypes.bool,
   searchError: PropTypes.object,
   searchResult: PropTypes.object,
-  searchMode: PropTypes.string
+  searchMode: PropTypes.string,
+  token: PropTypes.string,
+  history: PropTypes.object
 };
 
 const mapStateToProps = state => {
   return {
     isAuthenticated: state.auth.isAuthenticated,
     userData: state.auth.userData,
+    token: state.auth.tokenData,
     searchLoading: state.search.isLoading,
     searchResult: state.search.searchResult,
     searchError: state.search.error,

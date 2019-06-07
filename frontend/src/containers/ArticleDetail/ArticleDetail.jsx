@@ -37,10 +37,11 @@ class ArticleDetail extends PureComponent {
   }
 
   fetchArticleData = (slug) => {
-    this.setState({loading: true});
+    this.setState({loading: true, relatedLoading: true});
     ArticleService.getArticleDetail(slug)
       .then(resp => {
         this.setState({loading: false, article: resp});
+        document.title = resp.title;
         let tagIds = resp.tags.map(tag => tag.id);
         this.fetchRelatedArticles(tagIds);
       })
@@ -50,7 +51,7 @@ class ArticleDetail extends PureComponent {
   };
 
   fetchRelatedArticles = (tagIds) => {
-    this.setState({relatedLoading: true});
+
     ArticleService.getRelatedArticles(tagIds)
       .then(resp => {
         this.setState({relatedLoading: false, relatedArticles: resp});

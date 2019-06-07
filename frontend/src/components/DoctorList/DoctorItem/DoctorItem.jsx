@@ -23,10 +23,10 @@ const DoctorItem = props => {
       <div className="doctor-body">
         <div className="info">
           <h2>
-            <Link to={url}>{`${doctor.job.name} ${doctor.name}`}</Link>
+            <Link to={url}>{`${doctor.job ? doctor.job.name : ''} ${doctor.name}`}</Link>
           </h2>
           <div className="desc">
-            {doctor.info.trunc(80)}
+            {doctor.info ? doctor.info.trunc(80) : 'Chưa cung cấp'} 
             <Link to={url} className="readmore">
               Xem tiếp
               <i>

@@ -29,7 +29,7 @@ class CollapsibleBox extends PureComponent {
       renderContent = (
         <div className="collapsible-target text-bold">
           <ul>
-            {list && list.map(item => <li key={item}>{item}</li>)}
+            {list && list.map(item => <li key={`${item}-${Math.random()}`}>{item}</li>)}
           </ul>
         </div>
       );

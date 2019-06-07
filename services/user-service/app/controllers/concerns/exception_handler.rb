@@ -13,7 +13,7 @@ module ExceptionHandler
 
   included do
     # Define custom handlers
-    rescue_from ActiveRecord::RecordInvalid, with: :four_twenty_two
+    rescue_from ActiveRecord::RecordInvalid, with: :bad_request
     rescue_from ExceptionHandler::AuthenticationError, with: :unauthorized_request
     rescue_from ExceptionHandler::MissingToken, with: :four_twenty_two
     rescue_from ExceptionHandler::InvalidToken, with: :four_twenty_two
@@ -25,6 +25,10 @@ module ExceptionHandler
   end
 
   private
+
+  def bad_request(e)
+    json_response({message: e}, :bad_request)
+  end
 
   # JSON response with message; Status code 422 - unprocessable entity
   def four_twenty_two(e)

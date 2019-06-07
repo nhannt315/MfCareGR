@@ -3,10 +3,13 @@ var app = express();
 var cors = require('cors');
 var router = require('./routers/router');
 var bodyParser = require('body-parser');
+var multer = require('multer');
+var upload = multer();
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(upload.array());
 
 app.get('/', (req, res) => {
   res.send('Simple API gateway');

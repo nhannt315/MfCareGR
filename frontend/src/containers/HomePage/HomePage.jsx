@@ -47,12 +47,12 @@ class HomePage extends PureComponent {
       <div>
         <section className="area-background">
           <div className="container">
-            <h2 className="text-center text-uppercase color-white area-title">Tất cả vì sức khỏe người việt</h2>
-            <p className="text-center color-white area-sub-title"><em>
+            <h2 className="text-center text-uppercase color-white area-title animated animatedFadeInUp fadeInUp">Tất cả vì sức khỏe người việt</h2>
+            <p className="text-center color-white area-sub-title animated animatedFadeInUp fadeInUp"><em>
               Nền tảng y tế hàng đầu Việt Nam về thông tin khám chữa bệnh và chăm sóc sức khoẻ
             </em></p>
 
-            <form className="search-home text-center">
+            <form className="search-home text-center animated animatedFadeInUp fadeInUp">
               <div className="inner-home">
                 <div className="has-suggestion-home">
                   <input 
@@ -62,7 +62,7 @@ class HomePage extends PureComponent {
                     placeholder="câu hỏi, bác sĩ, phòng khám, bệnh viện..."
                   />
                   {searchResult && searchMode === 'homepage' ? (
-                    <SuggestionBox result={searchResult} clearResult={clearSearchResult} />
+                     <SuggestionBox result={searchResult} clearResult={clearSearchResult} />
                   ) : null}
                 </div>
                 <button type="submit">

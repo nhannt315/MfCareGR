@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {Drawer} from 'antd';
 import parse from 'html-react-parser';
+import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import './ArticleItem.scss';
@@ -9,11 +11,19 @@ import './ArticleItem.scss';
 class ArticleItem extends React.PureComponent {
 
   state = {
-    show: 'part'
+    show: 'part',
+    showDrawer: false
   };
 
   showFullContent = () => {
-    this.setState({show: 'full'});
+    // this.setState({show: 'full'});
+    this.setState({showDrawer: true});
+  };
+
+  onClose = () => {
+    this.setState({
+      showDrawer: false,
+    });
   };
 
   showPartContent = () => {
@@ -24,8 +34,6 @@ class ArticleItem extends React.PureComponent {
     const {article} = this.props;
     const placeholder = (
       <h2>
-        Nội dung
-        <span className="ellipsis">...</span>
         <span className="read-more" onClick={this.showFullContent}>Đọc tiếp</span>
       </h2>
     );
@@ -38,6 +46,16 @@ class ArticleItem extends React.PureComponent {
     const showElement = this.state.show === 'full' ? fullContent : placeholder;
     return (
       <div className="cms-item">
+        <Drawer
+          width={860}
+          title={article.title}
+          placement="right"
+          closable={false}
+          onClose={this.onClose}
+          visible={this.state.showDrawer}
+        >
+          {fullContent}
+        </Drawer>
         <h4><Link to={`/bai-viet/${article.slug}`}>{article.title}</Link></h4>
         <div className="cms-item-body">
           <div className="cms">
@@ -57,7 +75,7 @@ class ArticleItem extends React.PureComponent {
                 <i aria-hidden={true}>
                   <FontAwesomeIcon icon="comments" />
                 </i>
-                {article.published_date}
+                {moment(article.published_date).format('HH:mm DD/MM/YYYY')}
                 {this.state.show === 'full' ? (
                   <h2><span className="read-more" onClick={this.showPartContent}>Thu gọn</span></h2>
                 ) : null}

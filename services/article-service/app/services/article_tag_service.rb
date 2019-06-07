@@ -1,7 +1,8 @@
 class ArticleTagService < HttpService
-  attr_reader :tag_id_arr
-  def initialize(tag_id_arr)
+  attr_reader :tag_id_arr, :type
+  def initialize(tag_id_arr, type="id")
     @tag_id_arr = tag_id_arr
+    @type = type
   end
 
   def call
@@ -15,7 +16,11 @@ class ArticleTagService < HttpService
   end
 
   def get
-    resp = conn.get "/tags/get_tags_by_ids", payload
+    resp = if type == "id"
+             conn.get "/tags/get_tags_by_ids", payload
+           elsif type == "slug"
+             conn.get "/tags/get_tags_by_slugs", payload
+           end
 
     if resp.success?
       JSON.parse resp.body

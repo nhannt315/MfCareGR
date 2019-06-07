@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Form, Input, Checkbox, Button } from 'antd';
+import { Form, Input, Checkbox, Button, Upload, Select } from 'antd';
 import PropTypes from 'prop-types';
 
 import './DoctorForm.scss';
@@ -10,14 +10,27 @@ class DoctorForm extends PureComponent {
   state = {
     confirmDirty: false,
     autoCompleteResult: [],
+    identityImgList: [],
+    licenseImgList: []
+  };
+
+  uploadFile = (file) => {
+    console.log(file);
+  };
+
+  handleIdentityImgChange = ({fileList}) => {
+    this.setState({identityImgList: fileList});
+  };
+
+  handleLicenseImgChange = ({fileList}) => {
+    this.setState({licenseImgList: fileList});
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        // this.props.handleRegister(values);
-        console.log(values);
+        this.props.handleRegister(values);
       }
     });
   };
@@ -30,7 +43,7 @@ class DoctorForm extends PureComponent {
   compareToFirstPassword = (rule, value, callback) => {
     const form = this.props.form;
     if (value && value !== form.getFieldValue('password')) {
-      callback('Two passwords that you enter is inconsistent!');
+      callback('Mật khẩu nhập lại phải trùng khớp!');
     } else {
       callback();
     }
@@ -47,6 +60,8 @@ class DoctorForm extends PureComponent {
 
   render() {
     const {getFieldDecorator} = this.props.form;
+    const {specialities, submitting} = this.props;
+    const {identityImgList, licenseImgList} = this.state;
 
     const formItemLayout = {
       labelCol: {
@@ -150,7 +165,11 @@ class DoctorForm extends PureComponent {
                 required: true, message: 'Trường thông tin bắt buộc',
               }]
             })(
-              <Input />
+              <Select mode="multiple">
+                {specialities.map(element => (
+                  <Select.Option key={element.id} value={element.id}>{element.name}</Select.Option>
+                ))}
+              </Select>
             )}
           </FormItem>
           <FormItem
@@ -165,6 +184,56 @@ class DoctorForm extends PureComponent {
               <Input />
             )}
           </FormItem>
+          <FormItem
+            {...formItemLayout}
+            label="Chứng minh nhân dân"
+          >
+            {getFieldDecorator('identityImg', {
+              rules: [{
+                required: true, message: 'Trường thông tin bắt buộc',
+              }]
+            })(
+              <Upload
+                name="identityImg"
+                data={this.uploadFile}
+                beforeUpload={() => false}
+                listType="picture-card"
+                fileList={identityImgList}
+                onChange={this.handleIdentityImgChange}
+              >
+                {identityImgList.length > 0 ? null : (
+                  <Button icon="upload">
+                    Tải ảnh lên
+                  </Button>
+                )}
+              </Upload>
+            )}
+          </FormItem>
+          <FormItem
+            {...formItemLayout}
+            label="Bằng cấp/ giấy phép"
+          >
+            {getFieldDecorator('licenseImg', {
+              rules: [{
+                required: true, message: 'Trường thông tin bắt buộc',
+              }]
+            })(
+              <Upload
+                name="licenseImg"
+                data={this.uploadFile}
+                beforeUpload={() => false}
+                listType="picture-card"
+                fileList={licenseImgList}
+                onChange={this.handleLicenseImgChange}
+              >
+                {licenseImgList.length > 0 ? null : (
+                  <Button icon="upload">
+                    Tải ảnh lên
+                  </Button>
+                )}
+              </Upload>
+            )}
+          </FormItem>
           <FormItem {...tailFormItemLayout}>
             {getFieldDecorator('agreement', {
               rules: [{required: true, message: 'Bạn phải đồng ý với điều khoản sử dụng'}],
@@ -174,7 +243,8 @@ class DoctorForm extends PureComponent {
             )}
           </FormItem>
           <FormItem {...tailFormItemLayout}>
-            <Button className="confirm-button" type="primary" shape="round" icon="login" htmlType="submit">
+            <Button loading={submitting} className="confirm-button" type="primary" shape="round" icon="login"
+                    htmlType="submit">
               Đăng ký
             </Button>
           </FormItem>
@@ -185,7 +255,10 @@ class DoctorForm extends PureComponent {
 }
 
 DoctorForm.propTypes = {
-  form: PropTypes.object
+  form: PropTypes.object,
+  specialities: PropTypes.array,
+  submitting: PropTypes.bool,
+  handleRegister: PropTypes.func
 };
 
 export default Form.create()(DoctorForm);

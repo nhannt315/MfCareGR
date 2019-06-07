@@ -17,4 +17,17 @@ class TagsController < ApplicationController
     end
     render json: {status: "success"}, status: :ok
   end
+
+  def get_toukou_tags
+    tag_ids = params[:tag_ids]
+    render json: {message: "Missing tag ids"}, status: :unprocessable_entity unless tag_ids
+    result = []
+    tag_ids.each do |tag_id|
+      tmp = {}
+      tmp["tag_id"] = tag_id
+      tmp["thread_ids"] = ToukouTag.where(tag_id: tag_id).map {|toukou_tag| toukou_tag.toukou_id}
+      result.push tmp
+    end
+    render json: result, status: :ok
+  end
 end

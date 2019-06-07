@@ -1,0 +1,12 @@
+@import '../../../../styles/variables';
+
+.social-follow {
+  margin-left: 5px;
+  .follow {
+    color: $color-primary;
+  }
+
+  .unfollow {
+    color: #cacaca;
+  }
+}

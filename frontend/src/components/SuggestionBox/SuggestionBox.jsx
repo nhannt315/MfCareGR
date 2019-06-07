@@ -40,7 +40,7 @@ class SuggestionBox extends PureComponent {
           <ul className="list-unstyled">
             {tag.map(item => (
               <li key={item.id} className="item">
-                <Link to={`/benh/${item.slug}`}>
+                <Link to={`/chu-de/${item.slug}`}>
                   <img className="image" alt={item.name} src={DEFAULT_URL} />
                   <span className="title">{item.name}</span>
                 </Link>
@@ -206,7 +206,7 @@ class SuggestionBox extends PureComponent {
           <ul className="list-unstyled">
             {post.map(item => (
               <li key={item.id} className="item">
-                <Link to={`/benh/${item.slug}`}>
+                <Link to={`/hoi-bac-si/${item.toukou_id}`}>
                   <img
                     className="image"
                     alt={item.body_raw.trunc(30)}

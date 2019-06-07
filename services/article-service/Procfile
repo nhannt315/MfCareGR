@@ -1,0 +1,2 @@
+web: bash -c "rm -rf tmp/pids/server.pid && bundle exec rake tmp:cache:clear && bundle exec rails s -p 3000 -b '0.0.0.0'"
+consumer: WORKERS=ArticleWorker rake sneakers:run

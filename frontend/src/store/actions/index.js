@@ -21,7 +21,12 @@ export {
   getProfileFailue,
   updateProfile,
   updateProfileSuccess,
-  updateProfileFailue
+  updateProfileFailue,
+  addRemoveTagUser,
+  getTagDetailUser,
+  getTagDetailUserSuccess,
+  addRemoveFollowUser,
+  updateUserData
 } from './authAction';
 
 
@@ -33,7 +38,8 @@ export {
   addToThreadList,
   updateThreadList,
   updateTagThread,
-  updateLikeStatus
+  updateLikeStatus,
+  clearThreadList
 } from './threadActions';
 
 
@@ -44,3 +50,11 @@ export {
   searchFailure,
   clearSearchResult
 } from './searchAction';
+
+export {
+  fetchArticle,
+  fetchArticleStart,
+  fetchArticleSuccess,
+  fetchArticleFailure,
+  clearArticle
+} from './articleAction';

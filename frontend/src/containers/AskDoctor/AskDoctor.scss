@@ -9,9 +9,34 @@
   padding-bottom: 8px;
   z-index: 2;
 
+  .tag-manager-heading {
+    padding: 16px 0;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 16px;
+    color: #555;
+
+    span {
+      padding-right: 5px;
+    }
+
+    i {
+      width: 1.28571em;
+      text-align: center;
+      padding-right: 5px;
+    }
+
+    & > div {
+      display: inline-block;
+      text-decoration: underline;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
   .panel-transparent {
     background: transparent !important;
-    border: none;
+    border: none !important;
     padding: 8px;
     margin: 0;
   }

@@ -32,6 +32,7 @@ class DoctorListPage extends PureComponent {
   };
 
   componentDidMount() {
+    document.title = 'Danh sách bác sĩ';
     this.fetchDoctors();
     DoctorService.getFilterData()
       .then(resp => {

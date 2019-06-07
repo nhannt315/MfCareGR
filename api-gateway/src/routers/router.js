@@ -8,6 +8,8 @@ var threadService = require('./threadService');
 var tagService = require('./tagService');
 var searchService = require('./searchService');
 var doctorService = require('./doctorService');
+var userService = require('./userService');
+var notificationService = require('./notificationService');
 
 router.use((req, res, next) => {
   console.log('Called: ', req.path);
@@ -22,5 +24,7 @@ router.use(threadService);
 router.use(tagService);
 router.use(searchService);
 router.use(doctorService);
+router.use(userService);
+router.use(notificationService);
 
 module.exports = router;

@@ -27,6 +27,16 @@ router.get('/articles', (req, res) => {
     });
 });
 
+router.get('/articles/get_recent_crawled', (req, res) => {
+  api.get(req.originalUrl)
+    .then(resp => {
+      res.send(resp.data);
+    })
+    .catch(error => {
+      res.status(error.response.status).send(error.response.statusText);
+    });
+});
+
 router.post('/articles/related_articles', (req, res) => {
   api.post(req.originalUrl, {tag_ids: req.body.tag_ids})
     .then(resp => {

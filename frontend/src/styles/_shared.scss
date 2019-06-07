@@ -52,7 +52,7 @@
 }
 
 .min-page-height {
-  min-height: 500px!important;
+  min-height: 600px !important;
 }
 
 .p-w-sm {
@@ -113,6 +113,14 @@
   margin-bottom: 16px;
 }
 
+.m-t-sm {
+  margin-top: 16px;
+}
+
+.m-b-md {
+  margin-bottom: 24px;
+}
+
 .m-b-xs {
   margin-bottom: 8px;
 }
@@ -129,6 +137,22 @@
   padding-bottom: 1.6rem;
 }
 
+.p-w-xl {
+  padding: 0 40px;
+}
+
+.b-b {
+  border-bottom: 1px solid #e1e3e6;
+}
+
+.p-w-xs {
+  padding: 0 8px;
+}
+
+.p-sm {
+  padding: 16px;
+}
+
 .border-bottom {
   border-bottom: 1px solid #e7eaec;
 }
@@ -142,25 +166,30 @@
 }
 
 .pull-right {
-  float: right!important;
+  float: right !important;
 }
 
 .list-inline {
   list-style: none;
   margin-left: -5px;
+
+  & > li {
+    display: inline-block;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
 }
 
 .card {
   /* Add shadows to create the "card" effect */
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
 }
 
 /* On mouse-over, add a deeper shadow */
 .card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
-
 
 .like-active {
   color: $color-primary;
@@ -177,4 +206,8 @@
 
 .text-bold {
   font-weight: 700;
+}
+
+.no-margins {
+  margin: 0 !important;
 }

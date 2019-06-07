@@ -1,12 +1,13 @@
 import * as actionTypes from './actionTypes';
 
 
-export const getThreadList = (page, tagIds, doctorId) => {
+export const getThreadList = (page, tagIds, doctorId, mode = 'all') => {
   return {
     type: actionTypes.GET_THREAD_LIST,
     page: page,
     tagIds: tagIds,
-    doctorId: doctorId
+    doctorId: doctorId,
+    mode: mode
   };
 };
 
@@ -24,10 +25,12 @@ export const getThreadListFail = error => {
   };
 };
 
-export const getThreadListSuccess = threads => {
+export const getThreadListSuccess = (threads, hasMore, total) => {
   return {
     type: actionTypes.GET_THREAD_LIST_SUCCESS,
-    threadList: threads
+    threadList: threads,
+    hasMore: hasMore,
+    total: total
   };
 };
 
@@ -60,5 +63,11 @@ export const updateLikeStatus = (action, threadId, userId) => {
     action: action,
     threadId: threadId,
     userId: userId
+  };
+};
+
+export const clearThreadList = () => {
+  return {
+    type: actionTypes.CLEAR_THREAD_LIST
   };
 };

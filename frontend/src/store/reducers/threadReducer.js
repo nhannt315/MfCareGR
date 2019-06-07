@@ -4,7 +4,9 @@ const initialState = {
   threadList: [],
   isFetchingList: false,
   error: null,
-  page: 1
+  page: 1,
+  hasMore: false,
+  total: 0
 };
 
 const reducer = (state = initialState, action) => {
@@ -19,11 +21,15 @@ const reducer = (state = initialState, action) => {
       return updateLikeStatus(state, action);
     case actionTypes.GET_THREAD_LIST_START:
       return {...state, isFetchingList: true, error: null};
+    case actionTypes.CLEAR_THREAD_LIST:
+      return initialState;
     case actionTypes.GET_THREAD_LIST_SUCCESS:
       return {
         ...state,
         isFetchingList: false,
         threadList: state.threadList.concat(action.threadList),
+        hasMore: action.hasMore,
+        total: action.total,
         page: state.page + 1
       };
     case actionTypes.GET_THREAD_LIST_FAIL:

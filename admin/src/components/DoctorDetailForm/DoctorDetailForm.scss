@@ -1,0 +1,14 @@
+.form-field-text {
+  overflow: hidden;
+  font-weight: 400;
+  span {
+    font-style: italic;
+  }
+
+  img {
+    display: block;
+    max-width: 100px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+  }
+}

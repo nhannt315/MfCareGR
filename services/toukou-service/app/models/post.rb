@@ -1,5 +1,5 @@
 class Post < ApplicationRecord
-  belongs_to :toukou
+  belongs_to :toukou, counter_cache: true
   attr_accessor :author, :children, :assignment
   has_many :likes
   after_validation :log_errors, :if => Proc.new {|m| m.errors}

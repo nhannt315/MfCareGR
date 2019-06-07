@@ -6,6 +6,9 @@ class Toukou < ApplicationRecord
   attr_accessor :question
   attr_accessor :tags
 
+  scope :most_commented, -> {order(posts_count: :desc)}
+  scope :unanswered, -> {where(posts_count: 1).order(updated_at: :desc)}
+
   def post
     Post.where(toukou_id: id, is_question: true)[0]
   end

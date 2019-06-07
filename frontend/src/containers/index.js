@@ -11,6 +11,11 @@ import LoginPage from './LoginPage/Loadable';
 import RegisterPage from './RegisterPage/Loadable';
 import DoctorListPage from './DoctorListPage/Loadable';
 import DoctorDetailPage from './DoctorDetailPage/Loadable';
+import TopicPage from './TopicPage/Loadable';
+import ThreadPage from './ThreadPage/Loadable';
+import QuestionPage from './QuestionPage/Loadable';
+import UserPage from './UserPage/Loadable';
+
 export {
   HomePage,
   LookUp,
@@ -24,5 +29,9 @@ export {
   LoginPage,
   RegisterPage,
   DoctorListPage,
-  DoctorDetailPage
+  DoctorDetailPage,
+  TopicPage,
+  ThreadPage,
+  QuestionPage,
+  UserPage
 };

@@ -7,10 +7,12 @@ import PropTypes from 'prop-types';
 import './LoginPage.scss';
 import * as actions from '../../store/actions';
 import LoginForm from '../../components/LoginForm';
+import qs from 'query-string';
 
 class LoginPage extends PureComponent {
 
   componentDidMount() {
+    document.title = 'Đăng nhập';
     if (this.props.isAuthenticated) {
       this.props.history.push('/');
     }
@@ -20,7 +22,8 @@ class LoginPage extends PureComponent {
     const {isAuthenticated, errors} = this.props;
     if (isAuthenticated) {
       message.success('Chào mừng bạn quay trở lại với MfCare');
-      this.props.history.push('/');
+      let nextUrl = qs.parse(this.props.location.search, {ignoreQueryPrefix: true}).next;
+      this.props.history.push(nextUrl);
     }
     if (errors) {
       message.error('Đăng nhập thất bại, hãy kiểm tra lại email và mật khẩu');

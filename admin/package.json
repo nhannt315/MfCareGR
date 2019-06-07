@@ -1,0 +1,55 @@
+{
+  "name": "admin",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@craco/craco": "^5.0.2",
+    "antd": "^3.17.0",
+    "axios": "^0.18.0",
+    "babel-plugin-emotion": "^10.0.9",
+    "body-parser": "^1.19.0",
+    "classnames": "^2.2.6",
+    "craco-antd": "^1.10.0",
+    "craco-less": "^1.7.0",
+    "enquire-js": "^0.2.1",
+    "express": "^4.16.4",
+    "loadable-components": "^2.2.3",
+    "lodash": "^4.17.11",
+    "moment": "^2.24.0",
+    "node-sass": "^4.12.0",
+    "query-string": "^6.5.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.0.3",
+    "react-router": "^5.0.0",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "^3.0.1",
+    "redux": "^4.0.1",
+    "redux-saga": "^1.0.2",
+    "socket.io-client": "^2.2.0",
+    "styled-components": "^4.2.0"
+  },
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject",
+    "eslint": "eslint --ext .js,.jsx  ./src --fix"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "proxy": "http://localhost:4000",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

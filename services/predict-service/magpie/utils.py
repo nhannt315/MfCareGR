@@ -67,7 +67,7 @@ def get_all_answers(data_dir, filtered_by=None):
     for f in files:
         answers[f] = get_answers_for_doc(f + '.txt',
                                          data_dir,
-                                         filtered_by=filtered_by)
+                                      filtered_by=filtered_by)
 
     return answers
 

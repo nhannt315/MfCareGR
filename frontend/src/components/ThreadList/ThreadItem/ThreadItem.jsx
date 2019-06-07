@@ -4,6 +4,7 @@ import { Avatar, Row, Col, Button, message } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import parse from 'html-react-parser';
 
 import './ThreadItem.scss';
 import TagList from '../../TagList';
@@ -13,6 +14,7 @@ import ThreadService from '../../../services/threadService';
 import { generateColor, getDateTime } from '../../../shared/utilities';
 import Editor from '../../Editor';
 import EditableTagList from '../../EditableTagList/';
+import FollowButton from './FollowButton';
 
 
 class ThreadItem extends PureComponent {
@@ -31,13 +33,19 @@ class ThreadItem extends PureComponent {
   };
 
   componentDidMount() {
+    const {isThreadDetail, commentList, thread} = this.props;
+    if (isThreadDetail) {
+      this.setState({commentList: commentList});
+    }
     this.setState({
-      editChecked: this.props.thread.question.hiding_creator,
-      editContent: this.props.thread.question.body_raw
+      editChecked: thread.question.hiding_creator,
+      editContent: thread.question.body_raw
     });
   }
 
   fetchCommentList = () => {
+    if (this.props.isThreadDetail)
+      return;
     this.setState({listLoading: true});
     ThreadService.getCommentList(this.props.thread.slug)
       .then(resp => this.setState({listLoading: false, commentList: resp.childrens}))
@@ -104,7 +112,7 @@ class ThreadItem extends PureComponent {
     let oldLikeArray = commentList[commentIndex].likes;
     if (action === 'add') {
       oldLikeArray.push(userId);
-    } else if (action === 'remove'){
+    } else if (action === 'remove') {
       let index = oldLikeArray.indexOf(userId);
       if (index > -1) {
         oldLikeArray.splice(index, 1);
@@ -157,11 +165,11 @@ class ThreadItem extends PureComponent {
   handleAnswerClicked = () => {
     const question = this.props.thread.question;
     this.setState({showReplyBox: !this.state.showReplyBox});
-    if (question.comment_count <= 0) {
-      // this.fetchCommentList();
-    } else if (this.state.commentList.length <= 0) {
-      this.fetchCommentList();
-    }
+    // if (question.comment_count <= 0) {
+    //   // this.fetchCommentList();
+    // } else if (this.state.commentList.length <= 0) {
+    //   this.fetchCommentList();
+    // }
   };
 
   clearCommentList = () => {
@@ -170,10 +178,17 @@ class ThreadItem extends PureComponent {
 
   render() {
     const {showReplyBox, commentList, listLoading, editMode, editTag} = this.state;
-    const {thread, userData, token, updateTagThread} = this.props;
+    const {thread, userData, token, updateTagThread, isThreadDetail, addRemoveFollowUser, isAuthenticated} = this.props;
     const question = thread.question;
     const creator = thread.question.creator;
-    const isOwned = userData.id === creator.id;
+    const isOwned = userData.id === creator.id || userData.is_staff;
+    let showFollow = true;
+    if (thread.question.hiding_creator) {
+      showFollow = false;
+    }
+    if (isAuthenticated && creator.id === userData.id) {
+      showFollow = false;
+    }
     let isLiked = false;
     if (userData) {
       isLiked = question.likes.includes(userData.id);
@@ -190,15 +205,32 @@ class ThreadItem extends PureComponent {
         <div className="social-avatar">
           <span className="image">
             <span className="mask">
-              <Avatar shape="square" size={'large'} style={{backgroundColor: generateColor()}}>
-                {showName[0]}
-              </Avatar>
+              {creator.avatar ? (
+                <Avatar shape="square" size={'large'} src={creator.avatar} />
+              ) : (
+                <Avatar shape="square" size={'large'} style={{backgroundColor: generateColor()}}>
+                  {showName[0]}
+                </Avatar>
+              )}
             </span>
           </span>
           <div className="media-body">
             <p>
               <Link to="/">{showName}</Link>
-              <span><span><span> đã hỏi.</span></span></span>
+              {showFollow && (
+                <FollowButton
+                  userData={userData} token={token} targetUser={creator}
+                  addRemoveFollowUser={addRemoveFollowUser}
+                />
+              )}
+              <span><span><span>
+                {'  '}đã hỏi
+                {question.assignment !== null ? (
+                  <Link to={`/bac-si/${question.assignment.slug}`}>
+                    <strong>{`${question.assignment.job.name} ${question.assignment.name}`}</strong>
+                  </Link>
+                ) : '.'}
+              </span></span></span>
             </p>
             <small>
               {thread.question.hiding_creator ? (
@@ -210,15 +242,9 @@ class ThreadItem extends PureComponent {
                   <span>
                     {getDateTime(question.updated_at)}
                   </span>
-                  <span>
-                    {gender}
-                  </span>
-                  <span>
-                    {`${age} tuổi`}
-                  </span>
-                  <span>
-                    {creator.province ? creator.province.name : null}
-                  </span>
+                  {gender !== null ? <span>{gender}</span> : null}
+                  {age && (<span>{`${age} tuổi`}</span>)}
+                  {creator.province && <span>{creator.province.name}</span>}
                 </Link>
               )}
             </small>
@@ -226,7 +252,7 @@ class ThreadItem extends PureComponent {
         </div>
         <div className="social-body">
           <div className="m-b-xs break-word">
-            <p>{question.body_raw}</p>
+            <p>{parse(question.body_raw)}</p>
           </div>
           <div>
             {isOwned && !editMode ? (
@@ -330,7 +356,8 @@ class ThreadItem extends PureComponent {
           />
         </div>
         <div className="social-reply">
-          {showReplyBox ? <CommentBox replyThread={this.replyThread} submitting={this.state.submitting} /> : null}
+          {showReplyBox || isThreadDetail ?
+            <CommentBox replyThread={this.replyThread} submitting={this.state.submitting} /> : null}
         </div>
       </div>
     );
@@ -344,7 +371,10 @@ ThreadItem.propTypes = {
   token: PropTypes.string,
   updateThreadList: PropTypes.func,
   updateTagThread: PropTypes.func,
-  updateLikeThread: PropTypes.func
+  updateLikeThread: PropTypes.func,
+  isThreadDetail: PropTypes.bool,
+  commentList: PropTypes.array,
+  addRemoveFollowUser: PropTypes.func
 };
 
 export default ThreadItem;

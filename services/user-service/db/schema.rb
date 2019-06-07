@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_07_043622) do
+ActiveRecord::Schema.define(version: 2019_04_26_083540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,16 @@ ActiveRecord::Schema.define(version: 2019_03_07_043622) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followed_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["followed_id"], name: "index_relationships_on_followed_id"
+    t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
+    t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
   create_table "user_profiles", force: :cascade do |t|
@@ -39,7 +49,14 @@ ActiveRecord::Schema.define(version: 2019_03_07_043622) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "doctor_id"
+    t.string "phone"
     t.index ["province_id"], name: "index_user_profiles_on_province_id"
+  end
+
+  create_table "user_tags", force: :cascade do |t|
+    t.bigint "user_profile_id"
+    t.integer "tag_id"
+    t.index ["user_profile_id"], name: "index_user_tags_on_user_profile_id"
   end
 
 end

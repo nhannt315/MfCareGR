@@ -4,15 +4,25 @@ import { Skeleton } from 'antd';
 
 import './DoctorQuestion.scss';
 import QuestionBox from '../QuestionBox';
+import ThreadList from '../ThreadList';
 
 class DoctorQuestion extends PureComponent {
 
-  updateThreadList = (thread) => {
-    console.log(thread);
+  componentDidMount() {
+    this.props.clearThreadList();
+    this.fetchThreadData();
+  }
+
+  fetchThreadData = () => {
+    const {threadPage, getThreadList} = this.props;
+    getThreadList(threadPage, [], this.props.doctor.id);
   };
 
   render() {
-    const {doctor, token} = this.props;
+    const {
+      doctor, threadList, isFetchingList, isAuthenticated, userData,
+      token, addToThreadList, updateThreadList, updateTagThread, threadPage, hasMoreThread
+    } = this.props;
     if (!doctor) {
       return (
         <Skeleton active paragraph={{rows: 10}} />
@@ -21,7 +31,20 @@ class DoctorQuestion extends PureComponent {
     const placeholder = `Bạn muốn hỏi ${doctor.job.name} ${doctor.name} điều gì ?`;
     return (
       <div>
-        <QuestionBox token={token} placeholder={placeholder} updateThreadList={this.updateThreadList} />
+        <QuestionBox token={token} placeholder={placeholder} updateThreadList={addToThreadList} />
+        <ThreadList
+          threadList={threadList}
+          isLoading={isFetchingList}
+          fetchThreadList={this.fetchThreadData}
+          isAuthenticated={isAuthenticated}
+          userData={userData}
+          token={token}
+          updateThreadList={updateThreadList}
+          updateTagThread={updateTagThread}
+          updateLikeThread={this.props.updateLikeThread}
+          initialLoading={threadPage === 1 && isFetchingList}
+          hasMore={hasMoreThread}
+        />
       </div>
     );
   }
@@ -40,7 +63,9 @@ DoctorQuestion.propTypes = {
   addToThreadList: PropTypes.func,
   updateThreadList: PropTypes.func,
   updateTagThread: PropTypes.func,
-  updateLikeThread: PropTypes.func
+  updateLikeThread: PropTypes.func,
+  clearThreadList: PropTypes.func,
+  hasMoreThread: PropTypes.bool
 };
 
 export default DoctorQuestion;

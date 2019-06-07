@@ -3,7 +3,8 @@ import createSagaMiddleware from 'redux-saga';
 import authReducer from './reducers/authReducer';
 import threadReducer from './reducers/threadReducer';
 import searchReducer from './reducers/searchReducer';
-import { watchAuth, watchThread, watchSearch } from './sagas';
+import articleReducer from './reducers/articleReducer';
+import { watchAuth, watchThread, watchSearch, watchArticle } from './sagas';
 
 
 const composeEnhancers =
@@ -16,7 +17,8 @@ const composeEnhancers =
 const rootReducer = combineReducers({
   auth: authReducer,
   thread: threadReducer,
-  search: searchReducer
+  search: searchReducer,
+  article: articleReducer
 });
 
 const sagaMiddleware = createSagaMiddleware();
@@ -34,6 +36,7 @@ const store = createStore(
 sagaMiddleware.run(watchAuth);
 sagaMiddleware.run(watchThread);
 sagaMiddleware.run(watchSearch);
+sagaMiddleware.run(watchArticle);
 
 export default store;
 

@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import './Navbar.scss';
 import NavbarHeader from './NavbarHeader';
-import NavbarPrimary from './NavbarPrimary';
 
 class Navbar extends PureComponent {
   render() {
@@ -15,7 +14,8 @@ class Navbar extends PureComponent {
       searchLoading,
       searchResult,
       searchMode,
-      clearSearchResult
+      clearSearchResult,
+      token
     } = this.props;
     return (
       <header>
@@ -23,8 +23,7 @@ class Navbar extends PureComponent {
           isAuthenticated={isAuthenticated}
           logout={logout}
           userData={userData}
-        />
-        <NavbarPrimary
+          token={token}
           searchAll={searchAll}
           searchLoading={searchLoading}
           searchMode={searchMode}
@@ -41,6 +40,7 @@ Navbar.propTypes = {
   logout: PropTypes.func,
   userData: PropTypes.object,
   isAuthenticated: PropTypes.bool,
+  token: PropTypes.string,
   searchAll: PropTypes.func,
   clearSearchResult: PropTypes.func,
   searchLoading: PropTypes.bool,

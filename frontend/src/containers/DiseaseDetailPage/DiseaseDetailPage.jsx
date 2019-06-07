@@ -20,6 +20,7 @@ class DiseaseDetailPage extends PureComponent {
   componentDidMount() {
     this.setState({isLoading: true});
     let slug = this.props.match.params.slug;
+    document.title = 'Thông tin bệnh';
     this.fetchData(slug);
   }
 
@@ -34,6 +35,7 @@ class DiseaseDetailPage extends PureComponent {
     DiseaseService.getDiseaseDetail(slug)
       .then(resp => {
         this.setState({isLoading: false, disease: resp});
+        document.title = `Thông tin bệnh ${resp.name}`;
       })
       .catch(error => {
         this.setState({isLoading: false, error: error});

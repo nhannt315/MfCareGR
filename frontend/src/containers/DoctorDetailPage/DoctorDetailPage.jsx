@@ -24,10 +24,13 @@ class DoctorDetailPage extends PureComponent {
 
   componentDidMount() {
     const slug = this.props.match.params.slug;
+    document.title = 'Bác sĩ';
     this.setState({doctorLoading: true});
+    this.props.clearThreadList();
     DoctorService.getDoctorDetail(slug)
       .then(resp => {
         this.setState({doctorLoading: false, doctor: resp});
+        document.title = `${resp.job.name} ${resp.name}`;
       })
       .catch(error => {
         this.setState({doctorError: error, doctorLoading: false});
@@ -41,7 +44,6 @@ class DoctorDetailPage extends PureComponent {
 
   render() {
     const {doctor, currentTab} = this.state;
-    const {userData, token} = this.props;
     const imageUrl = doctor && doctor.data_images ? doctor.data_images[0] : DEFAULT_IMAGE;
     let tabContent = null;
     switch (currentTab) {
@@ -54,8 +56,7 @@ class DoctorDetailPage extends PureComponent {
       case 'ask':
         tabContent = (
           <DoctorQuestion
-            doctor={this.state.doctor} loading={this.state.doctorLoading} token={token}
-            userData={userData} />
+            doctor={this.state.doctor} loading={this.state.doctorLoading} {...this.props} />
         );
         break;
       default:
@@ -67,7 +68,7 @@ class DoctorDetailPage extends PureComponent {
         <div id="profile">
           <div className="profile-header p-t-sm p-b-sm border-bottom">
             <div className="container">
-              <img className="image" src={imageUrl} alt="doctor" />
+              <img className="doctor-image" src={imageUrl} alt="doctor" />
               <div className="profile-header-body">
                 <Breadcrumb className="breadcrumb">
                   <Breadcrumb.Item><Link to="/"><Icon type="home" /></Link></Breadcrumb.Item>
@@ -140,7 +141,8 @@ const mapStateToProps = state => {
     threadPage: state.thread.page,
     isAuthenticated: state.auth.isAuthenticated,
     userData: state.auth.userData,
-    token: state.auth.tokenData
+    token: state.auth.tokenData,
+    hasMoreThread: state.thread.hasMore
   };
 };
 
@@ -158,7 +160,9 @@ DoctorDetailPage.propTypes = {
   addToThreadList: PropTypes.func,
   updateThreadList: PropTypes.func,
   updateTagThread: PropTypes.func,
-  updateLikeThread: PropTypes.func
+  updateLikeThread: PropTypes.func,
+  clearThreadList: PropTypes.func,
+  hasMoreThread: PropTypes.bool
 };
 
 const mapDispatchToProps = dispatch => {
@@ -167,7 +171,8 @@ const mapDispatchToProps = dispatch => {
     addToThreadList: (thread) => dispatch(actions.addToThreadList(thread)),
     updateThreadList: (thread) => dispatch(actions.updateThreadList(thread)),
     updateTagThread: (threadId, tag, action) => dispatch(actions.updateTagThread(action, threadId, tag)),
-    updateLikeThread: (action, threadId, userId) => dispatch(actions.updateLikeStatus(action, threadId, userId))
+    updateLikeThread: (action, threadId, userId) => dispatch(actions.updateLikeStatus(action, threadId, userId)),
+    clearThreadList: () => dispatch(actions.clearThreadList())
   };
 };
 

@@ -4,10 +4,24 @@ class ToukousController < ApplicationController
   before_action :authorize_request, only: [:create, :update]
 
   def index
-    @threads = Toukou.order(updated_at: :desc).page(@page).per(@item_per_page)
-    if params[:doctor_id]
-      @thread = Toukou.order(updated_at: :desc).includes(:posts).where(posts: {is_question: true, doctor_id: params[:doctor_id]})
+    mode = params[:mode] || "all"
+    if mode == "all"
+      @threads = Toukou.order(updated_at: :desc).page(@page).per(@item_per_page)
     end
+    if mode == "most_commented"
+      @threads = Toukou.most_commented.page(@page).per(@item_per_page)
+    end
+    if mode == "unanswered "
+      @threads = Toukou.unanswered.page(@page).per(@item_per_page)
+    end
+    if params[:doctor_id]
+      @threads = Toukou.order(updated_at: :desc).includes(:posts)
+                     .where(posts: {is_question: true, doctor_id: params[:doctor_id]}).page(@page).per(@item_per_page)
+    end
+    if params[:tag_ids]
+      @threads = @threads.includes(:toukou_tags).where(toukou_tags: {tag_id: params[:tag_ids]})
+    end
+    @has_more = @item_per_page.to_i * @page.to_i < @threads.total_count.to_i
     user_id_arr = []
     tag_id_arr = []
     doctor_id_arr = []
@@ -16,7 +30,7 @@ class ToukousController < ApplicationController
       user_id_arr.push thread.question.user_profile_id
       tag_ids = thread.tag_ids
       tag_id_arr.concat tag_ids
-      doctor_id_arr.push(thread.question) if thread.question.doctor_id
+      doctor_id_arr.push(thread.question.doctor_id) if thread.question.doctor_id
     end
     doctors = PostDoctorService.new(doctor_id_arr.uniq).call
     users = PostUserService.new(user_id_arr.uniq).call
@@ -55,6 +69,9 @@ class ToukousController < ApplicationController
     @post.author = @current_user
     @thread.tags = tags
     @thread.question = @post
+    if @current_user.followers.length > 0
+      FollowedUserThreadPublisher.new(@current_user.id, @current_user.followers, @thread).call
+    end
   end
 
   def update
@@ -77,7 +94,12 @@ class ToukousController < ApplicationController
   end
 
   def show
-    @thread = Toukou.friendly.find(params[:id])
+    @thread = Toukou.find_by slug: params[:id]
+    @thread = Toukou.find_by id: params[:id] unless @thread
+    unless @thread
+      render json: {message: "Not found"}, status: :not_found
+      return
+    end
     @thread.tags = ThreadTagService.new(@thread.tag_ids).call
     @post = @thread.post
     user_id_arr = [@post.user_profile_id]

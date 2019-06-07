@@ -29,7 +29,7 @@ json.question do
     json.poster_type child.poster_type
     json.created_at child.created_at
     json.updated_at child.updated_at
-    json.creator child.author
+    json.author child.author
     json.likes child.likers
   end
 end

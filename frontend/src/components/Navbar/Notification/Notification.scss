@@ -1,0 +1,123 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.dropdown-menu-notification {
+  @include box-shadow;
+  position: absolute;
+  z-index: 1;
+  left: -180px;
+  //top: 60px;
+  min-height: 10px;
+  min-width: 10px;
+  width: 360px;
+  .triangle {
+    position: absolute;
+    top: -8px;
+    left: 190px;
+    height: 15px;
+    width: 15px;
+    border-radius: 6px 0px 0px 0px;
+    transform: rotate(45deg);
+    background: $color-white;
+  }
+
+  .no-notification {
+    text-align: center;
+    padding: 10px 0 10px 0;
+    color: blue;
+    font-weight: 500;
+  }
+
+  .dropdown-header {
+    background: $color-primary-dark;
+    padding: 15px;
+    position: relative;
+    text-align: center;
+    color: #747F8B;
+    font-weight: bold;
+    border-radius: 10px 10px 0 0;
+    border: 0px;
+    border-style: solid;
+    border-bottom-width: 1px;
+    -moz-border-image: -moz-linear-gradient(right, white, #cedae0, #cedae0, white) 1 20%;
+    -o-border-image: -o-linear-gradient(right, white, #cedae0, #cedae0, white) 1 20%;
+    border-image: linear-gradient(to right, white 0%, #cedae0 40%, #cedae0 60%, white 100%) 1 20%;
+    box-shadow: 0px 2px 10px -2px #cedae0;
+
+
+
+    .heading {
+      color: $color-white;
+    }
+
+    .count {
+      color: $color-white;
+      position: static;
+      height: 25px;
+      width: 25px;
+      display: inline-block;
+      line-height: 24px;
+      margin-left: 8px;
+      font-size: 12px;
+      vertical-align: middle;
+    }
+  }
+
+  .dropdown-body {
+    max-height: 292px;
+    background: #e9f0f3;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    .notification.new {
+      -webkit-transition: all 500ms ease;
+      -moz-transition: all 500ms ease;
+      -ms-transition: all 500ms ease;
+      -o-transition: all 500ms ease;
+      transition: all 500ms ease;
+      background: #e9f0f3;
+    }
+
+    .notification {
+      background: #FFF;
+      padding: 15px;
+      border: 0px;
+      border-style: solid;
+      border-bottom-width: 1px;
+      -moz-border-image: -moz-linear-gradient(right, white, #cedae0, #cedae0, white) 1 20%;
+      -o-border-image: -o-linear-gradient(right, white, #cedae0, #cedae0, white) 1 20%;
+      border-image: linear-gradient(to right, white 0%, #cedae0 40%, #cedae0 60%, white 100%) 1 20%;
+      &-image {
+        display: inline-block;
+        height: 32px;
+        width: 32px;
+        overflow: hidden;
+        border-radius: 100%;
+      }
+
+      &-image-wrapper {
+        display: table-cell;
+        vertical-align: middle;
+      }
+
+      &-text {
+        display: table-cell;
+        padding-left: 15px;
+        vertical-align: middle;
+        color: #747F8B;
+        cursor: pointer;
+        font-size: 14px;
+        word-spacing: 2px;
+        line-height: 21px;
+
+        &:hover {
+          color: $color-primary-dark;
+        }
+
+        .highlight {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

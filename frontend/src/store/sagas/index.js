@@ -5,7 +5,8 @@ import * as actionTypes from '../actions/actionTypes';
 import {
   loginSaga,
   logoutSaga,
-  authCheckStateSaga
+  authCheckStateSaga,
+  signUpSaga
 } from './authSaga';
 
 import {
@@ -16,11 +17,16 @@ import {
   searchAllSaga
 } from './searchSaga';
 
+import {
+  fetchArticle
+} from './articleSaga';
+
 export function* watchAuth() {
   yield all([
     takeLatest(actionTypes.LOGIN, loginSaga),
     takeLatest(actionTypes.LOGOUT, logoutSaga),
-    takeLatest(actionTypes.AUTH_CHECK_STATE, authCheckStateSaga)
+    takeLatest(actionTypes.AUTH_CHECK_STATE, authCheckStateSaga),
+    takeLatest(actionTypes.SIGN_UP, signUpSaga)
   ]);
 }
 
@@ -33,5 +39,11 @@ export function* watchThread() {
 export function* watchSearch() {
   yield all([
     takeLatest(actionTypes.SEARCH_ALL, searchAllSaga)
+  ]);
+}
+
+export function* watchArticle() {
+  yield all([
+    takeLatest(actionTypes.FETCH_ARTICLE, fetchArticle)
   ]);
 }
