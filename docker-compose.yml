@@ -36,23 +36,23 @@ services:
       - search-app
       - notification-app
     ports:
-      - "4000:4000"
-  # front-end:
-  #   build:
-  #     context: ./frontend
-  #     dockerfile: Dockerfile
-  #   volumes:
-  #     - ./frontend/src:/app/src
-  #   ports:
-  #     - "7000:3000"
-  # admin:
-  #   build:
-  #     context: ./admin
-  #     dockerfile: Dockerfile
-  #   volumes:
-  #     - ./admin/src:/app/src
-  #   ports:
-  #     - "7000:4001"   
+      - '4000:4000'
+  front-end:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend/src:/app/src
+    ports:
+      - '3000:3000'
+  admin:
+    build:
+      context: ./admin
+      dockerfile: Dockerfile
+    volumes:
+      - ./admin/src:/app/src
+    ports:
+      - '7000:3001'
   notification-app:
     build:
       context: ./services/notification-service
@@ -60,7 +60,7 @@ services:
     volumes:
       - ./services/notification-service:/notification-app
     ports:
-      - "8080:8080"
+      - '8080:8080'
     depends_on:
       - rabbitmq
   mail-app:
@@ -68,18 +68,18 @@ services:
       context: ./services/mail-service
       dockerfile: Dockerfile
     volumes:
-    - ./services/mail-service:/mail-app
+      - ./services/mail-service:/mail-app
     depends_on:
-    - rabbitmq
+      - rabbitmq
   crawl-app:
     build:
       context: ./services/crawl-service
       dockerfile: Dockerfile
     volumes:
-    - ./services/crawl-service:/crawl-app
+      - ./services/crawl-service:/crawl-app
     depends_on:
-    - rabbitmq
-    - article-app
+      - rabbitmq
+      - article-app
   # notification-db:
   #   container_name: notification-db
   #   image: mongo
@@ -92,8 +92,8 @@ services:
       context: ./rabbitmq
       dockerfile: Dockerfile
     ports:
-      - "5672:5672"
-      - "15672:15672"
+      - '5672:5672'
+      - '15672:15672'
     volumes:
       - rabbitmq_data:/data
   predict-app:
@@ -103,9 +103,9 @@ services:
     volumes:
       - ./services/predict-service:/app
     ports:
-      - "5000:5000"
+      - '5000:5000'
   article-app:
-#    command: bash -c "rm -f tmp/pids/server.pid && rm -rf tmp/cache && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    #    command: bash -c "rm -f tmp/pids/server.pid && rm -rf tmp/cache && bundle exec rails s -p 3000 -b '0.0.0.0'"
     command: foreman start
     build:
       context: ./services/article-service
@@ -210,8 +210,8 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.6.2
     container_name: elasticsearch
     environment:
-      ES_JAVA_OPTS: "-Xms750m -Xmx750m"
+      ES_JAVA_OPTS: '-Xms750m -Xmx750m'
     volumes:
       - esdata:/usr/share/elasticsearch/data
     ports:
-      - "9200:9200"
+      - '9200:9200'

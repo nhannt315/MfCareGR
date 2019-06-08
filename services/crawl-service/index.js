@@ -69,7 +69,7 @@ const crawlArticle = async () => {
 };
 
 const job = new cron.CronJob({
-  cronTime: '00 35 19 * * 0-6', // Chạy Jobs vào 23h30 hằng đêm
+  cronTime: '00 22 21 * * 0-6', // Chạy Jobs vào 23h30 hằng đêm
   onTick: function () {
     crawlArticle();
     console.log('Cron jub runing...');
@@ -87,7 +87,7 @@ setTimeout(() => job.start(), 20000);
 const rabbitmq = new RabbitMQ(onRabbitMqConnected);
 
 
-// job.start();
+job.start();
 // crawlArticle();
 
 

@@ -1,7 +1,7 @@
 import queryString from 'query-string';
 
 // export const BASE_URL = 'http://192.168.1.20:4000';
-export const BASE_URL = 'http://api-gate-way:4000';
+export const BASE_URL = 'http://localhost:4000';
 
 
 export const LOGIN = '/auth/login';
