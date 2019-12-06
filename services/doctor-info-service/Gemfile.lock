@@ -50,8 +50,6 @@ GEM
     amq-protocol (2.3.0)
     arel (9.0.0)
     ast (2.4.0)
-    bootsnap (1.4.0)
-      msgpack (~> 1.0)
     builder (3.2.3)
     bunny (2.13.0)
       amq-protocol (~> 2.3, >= 2.3.0)
@@ -134,7 +132,6 @@ GEM
     mini_mime (1.0.1)
     mini_portile2 (2.4.0)
     minitest (5.11.3)
-    msgpack (1.2.6)
     multi_json (1.13.1)
     multipart-post (2.0.0)
     nio4r (2.3.1)
@@ -149,7 +146,7 @@ GEM
       activesupport (>= 4.2)
       arel (>= 6)
     powerpack (0.1.2)
-    puma (3.12.0)
+    puma (3.12.2)
     rack (2.0.6)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -231,7 +228,6 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
-  bootsnap (>= 1.1.0)
   bunny
   byebug
   config
@@ -242,7 +238,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)
   pg_search
-  puma (~> 3.11)
+  puma (~> 3.12)
   rails (~> 5.2.2)
   rename
   rubocop (~> 0.54.0)
